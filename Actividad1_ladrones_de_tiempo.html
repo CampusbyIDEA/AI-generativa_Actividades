@@ -523,6 +523,52 @@
     margin: 48px 0;
   }
 
+  /* ── BOTÓN PDF ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-top: 32px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 16px; }
+  .print-icon { font-size: 22px; flex-shrink: 0; }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .print-btn:active { transform: translateY(0); }
+
+  /* ── ESTILOS DE IMPRESIÓN ── */
+  @media print {
+    body { background: white; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 40px; }
+    .header-stripe, .progress-wrap, .add-row-btn, .delete-row, .print-bar { display: none !important; }
+    .main { padding: 24px 32px; }
+    .table-wrapper, .question-card, .intro-block, .nota-final { break-inside: avoid; box-shadow: none; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; min-height: 60px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible; height: auto; }
+    .divider { margin: 24px 0; }
+    @page { margin: 1.5cm; }
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 640px) {
     .header { padding: 40px 24px 32px; }
@@ -655,9 +701,20 @@
   <div class="nota-final">
     <div class="nota-icon">📌</div>
     <div class="nota-text">
-      <strong>¿Para qué sirve esto?</strong> A lo largo del curso volveremos a este diagnóstico. Cada herramienta y actividad tiene una aplicación directa en alguno de los puntos que has identificado aquí. Cuanto más concreto hayas sido ahora, más útil te resultará todo lo que viene después.<br><br>
-      Esta actividad no tiene calificación. Puedes guardar tus respuestas con <strong>Ctrl+P → Guardar como PDF</strong> si quieres conservarlas.
+      <strong>¿Para qué sirve esto?</strong> A lo largo del curso volveremos a este diagnóstico. Cada herramienta y actividad tiene una aplicación directa en alguno de los puntos que has identificado aquí. Cuanto más concreto hayas sido ahora, más útil te resultará todo lo que viene después.
     </div>
+  </div>
+
+  <!-- BOTÓN GUARDAR PDF -->
+  <div class="print-bar" id="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
   </div>
 
 </div>
