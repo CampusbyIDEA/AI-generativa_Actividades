@@ -283,7 +283,7 @@
   }
   .td:last-child { border-right: none; justify-content: center; align-items: center; }
 
-  .td textarea {
+  .td-edit {
     width: 100%;
     border: none;
     background: transparent;
@@ -291,28 +291,23 @@
     font-size: 12.5px;
     font-weight: 300;
     color: var(--ink);
-    resize: none;
     padding: 10px 8px;
     line-height: 1.55;
     outline: none;
     min-height: 58px;
+    word-break: break-word;
+    white-space: pre-wrap;
   }
-
-  .td textarea::placeholder {
+  .td-edit:focus { background: rgba(63,122,147,0.04); }
+  .td-edit:empty::before {
+    content: attr(data-placeholder);
     color: var(--camel-mid);
     font-style: italic;
     font-size: 12px;
-  }
-
-  .td textarea:focus { background: rgba(63,122,147,0.04); }
-
-  .example-row { background: rgba(234,228,214,0.45); }
-
-  .example-row .td textarea {
-    color: var(--camel-mid);
-    font-style: italic;
     pointer-events: none;
   }
+  .example-row { background: rgba(234,228,214,0.45); }
+  .example-row .td-edit { color: var(--camel-mid); font-style: italic; pointer-events: none; }
 
   .example-badge {
     font-size: 9px;
@@ -403,23 +398,29 @@
     width: 100%;
     border: none;
     border-bottom: 1.5px solid var(--line);
-    background: transparent;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ink);
-    padding: 8px 0;
+    background: rgba(63,122,147,0.05);
+    border-radius: 4px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--navy);
+    padding: 8px 10px;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
     resize: none;
     min-height: 36px;
     line-height: 1.6;
   }
-  .question-input:focus { border-bottom-color: var(--teal); }
+  .question-input:focus {
+    border-bottom-color: var(--teal);
+    background: rgba(63,122,147,0.09);
+  }
   .question-input::placeholder {
     color: var(--camel-mid);
     font-style: italic;
-    font-size: 12.5px;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
   }
 
   /* ── FRASE CIERRE ── */
@@ -561,10 +562,16 @@
     .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 40px; }
     .header-stripe, .progress-wrap, .add-row-btn, .delete-row, .print-bar { display: none !important; }
     .main { padding: 24px 32px; }
-    .table-wrapper, .question-card, .intro-block, .nota-final { break-inside: avoid; box-shadow: none; }
+    .table-wrapper { box-shadow: none; overflow: visible; }
+    .question-card, .intro-block, .nota-final { break-inside: avoid; box-shadow: none; }
     .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
-    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; min-height: 60px; }
-    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible; height: auto; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .td-edit { min-height: 0 !important; padding: 4px 8px !important; }
+    .table-row { break-inside: avoid; }
+    .example-row { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     .divider { margin: 24px 0; }
     @page { margin: 1.5cm; }
   }
@@ -629,10 +636,10 @@
 
     <!-- Fila ejemplo -->
     <div class="table-row example-row">
-      <div class="td"><textarea readonly>Primera hora</textarea></div>
-      <div class="td"><textarea readonly>Registrar incidencia del turno anterior</textarea></div>
-      <div class="td"><textarea readonly>La dejo para el final del turno</textarea></div>
-      <div class="td"><textarea readonly>No recuerdo bien los detalles al escribir</textarea></div>
+      <div class="td"><div class="td-edit">Primera hora</div></div>
+      <div class="td"><div class="td-edit">Registrar incidencia del turno anterior</div></div>
+      <div class="td"><div class="td-edit">La dejo para el final del turno</div></div>
+      <div class="td"><div class="td-edit">No recuerdo bien los detalles al escribir</div></div>
       <div class="td"><span class="example-badge">Ejemplo</span></div>
     </div>
 
@@ -727,10 +734,10 @@
     const row = document.createElement('div');
     row.className = 'table-row';
     row.innerHTML = `
-      <div class="td"><textarea placeholder="Ej: Inicio del turno, mediodía..." oninput="updateProgress()"></textarea></div>
-      <div class="td"><textarea placeholder="¿Qué tarea?" oninput="updateProgress()"></textarea></div>
-      <div class="td"><textarea placeholder="¿Se acumula, se hace con prisas...?" oninput="updateProgress()"></textarea></div>
-      <div class="td"><textarea placeholder="¿Qué pasa después?" oninput="updateProgress()"></textarea></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Ej: Inicio del turno, mediodía..." oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="¿Qué tarea?" oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="¿Se acumula, se hace con prisas...?" oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="¿Qué pasa después?" oninput="updateProgress()"></div></div>
       <div class="td"><button class="delete-row" onclick="deleteRow(this)" title="Eliminar fila">×</button></div>
     `;
     container.appendChild(row);
@@ -746,10 +753,10 @@
   }
 
   function updateProgress() {
-    const tablaCells = document.querySelectorAll('#filas-container textarea');
+    const tablaCells = document.querySelectorAll('#filas-container .td-edit');
     let parte1 = false;
     for (const cell of tablaCells) {
-      if (cell.value.trim().length > 2) { parte1 = true; break; }
+      if (cell.innerText.trim().length > 2) { parte1 = true; break; }
     }
 
     const qs = document.querySelectorAll('.question-input');
