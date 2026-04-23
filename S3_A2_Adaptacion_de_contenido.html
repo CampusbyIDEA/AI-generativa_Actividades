@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adaptación de contenido — Actividad 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 18px;
+  }
+  .header h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: clamp(36px, 5.5vw, 58px);
+    font-weight: 400;
+    line-height: 1.08;
+    margin-bottom: 10px;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--yellow);
+  }
+  .header-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(182,206,216,0.15);
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+  }
+  .meta-item strong {
+    display: block;
+    color: var(--teal-light);
+    font-weight: 500;
+    font-size: 11px;
+    margin-bottom: 2px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 40px 88px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    background: var(--white);
+    border-left: 4px solid var(--teal);
+    padding: 26px 30px;
+    margin-bottom: 44px;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 1px 4px rgba(0,47,72,0.06);
+  }
+  .intro-block p {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--ink-light);
+  }
+  .intro-block p + p { margin-top: 10px; }
+  .intro-block strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── PROGRESO ── */
+  .progress-wrap {
+    position: relative;
+    margin-bottom: 52px;
+  }
+  .progress-label-text {
+    position: absolute;
+    right: 0;
+    top: -22px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .progress-track {
+    background: var(--camel-light);
+    height: 3px;
+    border-radius: 2px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    position: relative;
+  }
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    right: -1px; top: -3px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--teal);
+    transition: opacity 0.3s;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+    margin-top: 52px;
+  }
+  .section-number {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .section-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 22px;
+    font-weight: 300;
+  }
+
+  /* ── CASO BLOCK ── */
+  .caso-block {
+    background: var(--white);
+    border-left: 4px solid var(--navy);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 1px 4px rgba(0,47,72,0.06);
+  }
+  .caso-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .caso-block p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+  }
+
+  /* ── TABLA ── */
+  .table-wrapper {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,47,72,0.07);
+    margin-bottom: 28px;
+  }
+  .table-header {
+    display: grid;
+    background: var(--navy);
+  }
+  .table-header-wide { grid-template-columns: 2fr 3fr; }
+  .th {
+    padding: 13px 20px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    border-right: 1px solid rgba(255,255,255,0.07);
+  }
+  .th:last-child { border-right: none; }
+  .table-row {
+    display: grid;
+    border-bottom: 1px solid var(--line);
+  }
+  .table-row-wide { grid-template-columns: 2fr 3fr; }
+  .table-row:last-child { border-bottom: none; }
+  .td {
+    padding: 0;
+    border-right: 1px solid var(--line);
+  }
+  .td:last-child { border-right: none; }
+  .td-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: var(--ink);
+    padding: 12px 16px;
+    line-height: 1.55;
+  }
+  .td-label strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .td-label span {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 300;
+    margin-top: 2px;
+  }
+  .td-edit {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12.5px;
+    font-weight: 300;
+    color: var(--ink);
+    padding: 12px 16px;
+    line-height: 1.55;
+    outline: none;
+    min-height: 52px;
+    word-break: break-word;
+    white-space: pre-wrap;
+    border: none;
+    background: transparent;
+  }
+  .td-edit:focus { background: rgba(63,122,147,0.04); }
+  .td-edit:empty::before {
+    content: attr(data-placeholder);
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 12px;
+    pointer-events: none;
+  }
+
+  /* ── PROMPT EDITOR ── */
+  .prompt-editor {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,47,72,0.07);
+    margin-top: 28px;
+    margin-bottom: 16px;
+  }
+  .prompt-editor-label {
+    background: var(--navy);
+    color: var(--teal-light);
+    padding: 12px 20px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge-ok {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background: rgba(29,158,117,0.25);
+    color: #7DDFC0;
+  }
+  .badge-iter {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background: rgba(252,222,6,0.2);
+    color: var(--yellow);
+  }
+  .prompt-textarea {
+    width: 100%;
+    min-height: 120px;
+    border: none;
+    background: rgba(234,244,239,0.3);
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--navy);
+    padding: 18px 22px;
+    line-height: 1.7;
+    outline: none;
+    resize: none;
+  }
+  .prompt-textarea::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  .prompt-textarea:focus {
+    background: rgba(63,122,147,0.05);
+  }
+
+  /* ── RESULTADO IA ── */
+  .resultado-editor {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,47,72,0.07);
+    margin-top: 20px;
+    margin-bottom: 16px;
+  }
+  .resultado-label {
+    background: var(--teal-dark);
+    color: var(--teal-light);
+    padding: 12px 20px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .resultado-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background: rgba(182,206,216,0.2);
+    color: var(--teal-light);
+  }
+  .resultado-textarea {
+    width: 100%;
+    min-height: 140px;
+    border: none;
+    background: rgba(17,81,109,0.03);
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink);
+    padding: 18px 22px;
+    line-height: 1.7;
+    outline: none;
+    resize: none;
+  }
+  .resultado-textarea::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .resultado-textarea:focus {
+    background: rgba(63,122,147,0.05);
+  }
+
+  /* ── QUESTIONS ── */
+  .questions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .question-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 24px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 3px rgba(0,47,72,0.05);
+  }
+  .question-card:focus-within {
+    border-color: var(--teal);
+    box-shadow: 0 2px 10px rgba(63,122,147,0.12);
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 6px;
+    display: block;
+    letter-spacing: 0.08em;
+  }
+  .question-text {
+    font-size: 13.5px;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  .question-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    background: rgba(63,122,147,0.05);
+    border-radius: 4px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--navy);
+    padding: 8px 10px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    resize: none;
+    min-height: 36px;
+    line-height: 1.6;
+  }
+  .question-input:focus {
+    border-bottom-color: var(--teal);
+    background: rgba(63,122,147,0.09);
+  }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  .frase-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--yellow);
+  }
+  .frase-label {
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .frase-stem {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .frase-input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    color: var(--white);
+    padding: 14px 16px;
+    outline: none;
+    resize: none;
+    line-height: 1.6;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .frase-input::placeholder {
+    color: rgba(255,255,255,0.25);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  .frase-input:focus {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(252,222,6,0.35);
+  }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--camel-light);
+  }
+  .nota-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .nota-text {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .nota-text strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+
+  /* ── CALLOUT ITERACIÓN ── */
+  .iter-callout {
+    background: var(--white);
+    border-left: 4px solid var(--yellow);
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 1px 4px rgba(0,47,72,0.06);
+  }
+  .iter-callout p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .iter-callout strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── BOTÓN PDF ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-top: 32px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 16px; }
+  .print-icon { font-size: 22px; flex-shrink: 0; }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .print-btn:active { transform: translateY(0); }
+
+  /* ── ESTILOS DE IMPRESIÓN ── */
+  @media print {
+    body { background: white; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 0; }
+    .header-stripe, .progress-wrap, .print-bar { display: none !important; }
+    .main { padding: 24px 32px; }
+    .table-wrapper { box-shadow: none; overflow: visible; }
+    .question-card, .intro-block, .nota-final, .caso-block, .prompt-editor, .resultado-editor, .iter-callout { break-inside: avoid; box-shadow: none; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .td-edit { min-height: 0 !important; padding: 4px 8px !important; }
+    .table-row { break-inside: avoid; }
+    .divider { margin: 24px 0; }
+    .prompt-textarea, .resultado-textarea { background: white !important; border: 1px solid #ccc !important; color: var(--navy) !important; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 24px; }
+    .main { padding: 36px 20px 60px; }
+    .table-header-wide, .table-row-wide {
+      grid-template-columns: 1fr;
+    }
+    .td { border-right: none; border-bottom: 1px solid var(--line); }
+    .td:last-child { border-bottom: none; }
+    .frase-block { padding: 28px 22px; }
+    .header-meta { gap: 16px; }
+    .caso-block { padding: 20px 22px; }
+    .iter-callout { padding: 16px 20px; }
+    .print-bar { flex-direction: column; text-align: center; }
+    .print-bar-left { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 3 · Actividad 2</div>
+    <h1>Adaptación de <em>contenido</em></h1>
+    <p class="header-sub">Generar una misma pauta para un auxiliar y para un médico</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>15–20 min</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — ChatGPT, Copilot, Gemini u otra similar</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="intro-block">
+    <p>En el trabajo diario de un centro sociosanitario, una misma información se comunica a perfiles muy distintos. Un cambio en la pauta de movilización de una persona usuaria no se explica igual a un auxiliar de turno que a un médico rehabilitador. Los datos son los mismos; la perspectiva, el vocabulario y el nivel de detalle, no.</p>
+    <p>Esta actividad propone un caso concreto y pide generar <strong>dos versiones del mismo contenido</strong>, adaptadas a dos destinatarios profesionales diferentes, utilizando el modelo ROCI y la iteración.</p>
+  </div>
+
+  <!-- PROGRESO -->
+  <div class="progress-wrap">
+    <span class="progress-label-text" id="progress-label">0 / 3 partes completadas</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ PARTE 1 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 1</span>
+    <span class="section-title">El caso y la primera versión</span>
+  </div>
+  <p class="section-desc">Lee el caso con atención. Después, construye una instrucción ROCI para generar una versión de la pauta adaptada a un auxiliar de turno.</p>
+
+  <div class="caso-block">
+    <div class="caso-label">El caso</div>
+    <p>En un centro residencial de personas mayores, el equipo de fisioterapia ha revisado la pauta de movilización de una persona usuaria de ochenta y seis años con fractura de cadera intervenida hace tres semanas. El protocolo previo indicaba movilización pasiva asistida dos veces al día. Tras la valoración, la nueva pauta establece: inicio de bipedestación asistida con andador, una vez al día durante la primera semana, siempre en presencia de auxiliar y fisioterapeuta. Se mantiene la movilización pasiva en la segunda sesión. Se añade una observación: si la persona usuaria refiere dolor superior a cinco en escala EVA, se suspende la bipedestación y se notifica al médico rehabilitador.</p>
+  </div>
+
+  <p class="section-desc">El auxiliar necesita saber exactamente qué hacer, cuándo y en qué circunstancias avisar. No necesita la justificación clínica de los cambios. Completa cada bloque del modelo ROCI:</p>
+
+  <div class="table-wrapper">
+    <div class="table-header table-header-wide">
+      <div class="th">Bloque ROCI</div>
+      <div class="th">Tu aportación</div>
+    </div>
+    <div class="table-row table-row-wide">
+      <div class="td"><div class="td-label"><strong>R — Rol</strong><span>¿Desde qué perfil profesional debe escribir la IA?</span></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Ej: Actúa como la fisioterapeuta del centro..." oninput="updateProgress()"></div></div>
+    </div>
+    <div class="table-row table-row-wide">
+      <div class="td"><div class="td-label"><strong>O — Objetivo</strong><span>¿Para quién es y qué efecto debe producir?</span></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Ej: Dirigido a auxiliares de turno, para que sepan..." oninput="updateProgress()"></div></div>
+    </div>
+    <div class="table-row table-row-wide">
+      <div class="td"><div class="td-label"><strong>C — Contexto</strong><span>¿Qué datos de la situación necesita la IA?</span></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Los datos clínicos y operativos del caso..." oninput="updateProgress()"></div></div>
+    </div>
+    <div class="table-row table-row-wide">
+      <div class="td"><div class="td-label"><strong>I — Instrucción</strong><span>¿Qué documento, en qué tono, con qué formato?</span></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Ej: Redacta una pauta operativa breve, en tono directo..." oninput="updateProgress()"></div></div>
+    </div>
+  </div>
+
+  <p class="section-desc">Integra los cuatro bloques en una instrucción completa y envíala a la herramienta de IA:</p>
+
+  <div class="prompt-editor">
+    <div class="prompt-editor-label">
+      <span class="badge-ok">Tu prompt</span>
+      Instrucción ROCI completa — versión auxiliar
+    </div>
+    <textarea class="prompt-textarea" id="prompt-auxiliar" placeholder="Redacta aquí tu instrucción integrando los cuatro bloques ROCI..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <p class="section-desc" style="margin-top: 24px;">Pega aquí el resultado que ha generado la IA:</p>
+
+  <div class="resultado-editor">
+    <div class="resultado-label">
+      <span class="resultado-badge">Resultado</span>
+      Versión auxiliar — generada por la IA
+    </div>
+    <textarea class="resultado-textarea" id="resultado-auxiliar" placeholder="Copia y pega aquí el texto que ha generado la herramienta de IA..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════ PARTE 2 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 2</span>
+    <span class="section-title">La segunda versión, por iteración</span>
+  </div>
+  <p class="section-desc">Ahora el objetivo es generar una segunda versión del mismo contenido, adaptada a un médico rehabilitador. Este destinatario necesita la justificación clínica, los criterios de progresión y los umbrales de alerta, pero no las instrucciones paso a paso para la movilización.</p>
+
+  <div class="iter-callout">
+    <p><strong>No se empieza de cero.</strong> Se trabaja sobre la misma conversación con la IA, iterando sobre el resultado anterior. La herramienta ya tiene el contexto del caso; lo que hay que indicar es qué cambia: el destinatario, el enfoque, el nivel técnico.</p>
+  </div>
+
+  <p class="section-desc">Formula la repregunta que enviarías a la IA para obtener la versión para el médico rehabilitador:</p>
+
+  <div class="prompt-editor">
+    <div class="prompt-editor-label">
+      <span class="badge-iter">Repregunta</span>
+      Iteración — versión médico rehabilitador
+    </div>
+    <textarea class="prompt-textarea" id="prompt-medico" placeholder="Ej: Ahora adapta el mismo contenido para un médico rehabilitador. Necesita..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <p class="section-desc" style="margin-top: 24px;">Pega aquí el segundo resultado:</p>
+
+  <div class="resultado-editor">
+    <div class="resultado-label">
+      <span class="resultado-badge">Resultado</span>
+      Versión médico — generada por iteración
+    </div>
+    <textarea class="resultado-textarea" id="resultado-medico" placeholder="Copia y pega aquí la versión adaptada al médico rehabilitador..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════ PARTE 3 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 3</span>
+    <span class="section-title">Comparar y reflexionar</span>
+  </div>
+  <p class="section-desc">Ahora se tienen dos versiones del mismo contenido, generadas en la misma conversación. Es el momento de observar qué ha cambiado y por qué.</p>
+
+  <div class="questions-grid">
+    <div class="question-card">
+      <span class="question-num">01</span>
+      <p class="question-text">¿Qué diferencias concretas se observan entre ambas versiones en vocabulario, nivel de detalle y estructura?</p>
+      <textarea class="question-input" rows="2" placeholder="Compara las dos versiones..." oninput="updateProgress()"></textarea>
+    </div>
+    <div class="question-card">
+      <span class="question-num">02</span>
+      <p class="question-text">¿Cuál de los dos textos habría requerido más tiempo si se hubiera redactado desde cero, sin IA? ¿Por qué?</p>
+      <textarea class="question-input" rows="2" placeholder="Piensa en el tiempo de redacción manual..." oninput="updateProgress()"></textarea>
+    </div>
+    <div class="question-card">
+      <span class="question-num">03</span>
+      <p class="question-text">Si se necesitara una tercera versión —por ejemplo, para la familia de la persona usuaria—, ¿qué cambios habría que pedir en la repregunta?</p>
+      <textarea class="question-input" rows="2" placeholder="¿Qué ajustarías para un destinatario no profesional?" oninput="updateProgress()"></textarea>
+    </div>
+  </div>
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-label">Frase de cierre</div>
+    <div class="frase-stem">
+      <em>«Adaptar un contenido profesional a distintos destinatarios con IA es útil porque...</em>
+    </div>
+    <textarea class="frase-input" rows="3" placeholder="...escribe aquí tu respuesta" oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <div class="nota-icon">📌</div>
+    <div class="nota-text">
+      <strong>¿Para qué sirve esto?</strong> Esta actividad cierra la Sección 3 integrando las tres competencias trabajadas: construir una instrucción con el modelo ROCI, iterar para ajustar el resultado y adaptar un mismo contenido según el destinatario. A partir de la Sección 4, estas competencias se aplicarán a tareas cada vez más específicas del centro: documentación, comunicación y planificación.
+    </div>
+  </div>
+
+  <!-- BOTÓN PDF -->
+  <div class="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div>
+
+<script>
+  function updateProgress() {
+    // Parte 1: al menos 3 bloques ROCI + prompt + resultado pegado
+    const rociCells = document.querySelectorAll('.table-row-wide .td-edit');
+    let rociCount = 0;
+    rociCells.forEach(function(el) {
+      if (el.innerText.trim().length > 3) rociCount++;
+    });
+    var promptAux = document.getElementById('prompt-auxiliar');
+    var resultAux = document.getElementById('resultado-auxiliar');
+    var parte1 = rociCount >= 3 && promptAux.value.trim().length > 20 && resultAux.value.trim().length > 20;
+
+    // Parte 2: repregunta + resultado pegado
+    var promptMed = document.getElementById('prompt-medico');
+    var resultMed = document.getElementById('resultado-medico');
+    var parte2 = promptMed.value.trim().length > 15 && resultMed.value.trim().length > 20;
+
+    // Parte 3: al menos 2 preguntas + frase de cierre
+    var qs = document.querySelectorAll('.question-input');
+    var p3Count = 0;
+    qs.forEach(function(q) {
+      if (q.value.trim().length > 5) p3Count++;
+    });
+    var frase = document.querySelector('.frase-input');
+    var parte3 = p3Count >= 2 && frase && frase.value.trim().length > 5;
+
+    var completed = [parte1, parte2, parte3].filter(Boolean).length;
+    var pct = (completed / 3) * 100;
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = completed + ' / 3 partes completadas';
+  }
+</script>
+
+</body>
+</html>
