@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selección de herramienta — Actividad 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 18px;
+  }
+  .header h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: clamp(36px, 5.5vw, 58px);
+    font-weight: 400;
+    line-height: 1.08;
+    margin-bottom: 10px;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--yellow);
+  }
+  .header-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(182,206,216,0.15);
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+  }
+  .meta-item strong {
+    display: block;
+    color: var(--teal-light);
+    font-weight: 500;
+    font-size: 11px;
+    margin-bottom: 2px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 40px 88px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    background: var(--white);
+    border-left: 4px solid var(--teal);
+    padding: 26px 30px;
+    margin-bottom: 44px;
+    border-radius: 0 6px 6px 0;
+    box-shadow: 0 1px 4px rgba(0,47,72,0.06);
+  }
+  .intro-block p {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--ink-light);
+  }
+  .intro-block p + p { margin-top: 10px; }
+  .intro-block strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── PROGRESO ── */
+  .progress-wrap {
+    position: relative;
+    margin-bottom: 52px;
+  }
+  .progress-label-text {
+    position: absolute;
+    right: 0;
+    top: -22px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .progress-track {
+    background: var(--camel-light);
+    height: 3px;
+    border-radius: 2px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    position: relative;
+  }
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    right: -1px; top: -3px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--teal);
+    transition: opacity 0.3s;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+    margin-top: 52px;
+  }
+  .section-header:first-of-type { margin-top: 0; }
+  .section-number {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .section-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 22px;
+    font-weight: 300;
+  }
+
+  /* ── CASO BLOCK ── */
+  .caso-block {
+    background: var(--white);
+    border-left: 4px solid var(--navy);
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 1px 4px rgba(0,47,72,0.06);
+  }
+  .caso-label {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .caso-block p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+  }
+  .caso-block p + p { margin-top: 8px; }
+
+  /* ── QUESTIONS ── */
+  .questions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .question-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 24px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 3px rgba(0,47,72,0.05);
+  }
+  .question-card:focus-within {
+    border-color: var(--teal);
+    box-shadow: 0 2px 10px rgba(63,122,147,0.12);
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 6px;
+    display: block;
+    letter-spacing: 0.08em;
+  }
+  .question-text {
+    font-size: 13.5px;
+    color: var(--ink-light);
+    line-height: 1.65;
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  .question-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--line);
+    background: rgba(63,122,147,0.05);
+    border-radius: 4px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--navy);
+    padding: 8px 10px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    resize: none;
+    min-height: 36px;
+    line-height: 1.6;
+  }
+  .question-input:focus {
+    border-bottom-color: var(--teal);
+    background: rgba(63,122,147,0.09);
+  }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── PROMPT EDITOR ── */
+  .prompt-editor {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,47,72,0.07);
+    margin-top: 28px;
+    margin-bottom: 16px;
+  }
+  .prompt-editor-label {
+    background: var(--navy);
+    color: var(--teal-light);
+    padding: 12px 20px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge-ok {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background: rgba(29,158,117,0.25);
+    color: #7DDFC0;
+  }
+  .prompt-textarea {
+    width: 100%;
+    min-height: 120px;
+    border: none;
+    background: rgba(234,244,239,0.3);
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--navy);
+    padding: 18px 22px;
+    line-height: 1.7;
+    outline: none;
+    resize: none;
+  }
+  .prompt-textarea::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  .prompt-textarea:focus {
+    background: rgba(63,122,147,0.05);
+  }
+
+  /* ── RESULTADO IA ── */
+  .resultado-editor {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0,47,72,0.07);
+    margin-top: 20px;
+    margin-bottom: 16px;
+  }
+  .resultado-label {
+    background: var(--teal-dark);
+    color: var(--teal-light);
+    padding: 12px 20px;
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .resultado-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    background: rgba(182,206,216,0.2);
+    color: var(--teal-light);
+  }
+  .resultado-textarea {
+    width: 100%;
+    min-height: 140px;
+    border: none;
+    background: rgba(17,81,109,0.03);
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink);
+    padding: 18px 22px;
+    line-height: 1.7;
+    outline: none;
+    resize: none;
+  }
+  .resultado-textarea::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .resultado-textarea:focus {
+    background: rgba(63,122,147,0.05);
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  .frase-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--yellow);
+  }
+  .frase-label {
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .frase-stem {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .frase-input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    color: var(--white);
+    padding: 14px 16px;
+    outline: none;
+    resize: none;
+    line-height: 1.6;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .frase-input::placeholder {
+    color: rgba(255,255,255,0.25);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  .frase-input:focus {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(252,222,6,0.35);
+  }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--camel-light);
+  }
+  .nota-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .nota-text {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .nota-text strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+
+  /* ── BOTÓN PDF ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-top: 32px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 16px; }
+  .print-icon { font-size: 22px; flex-shrink: 0; }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .print-btn:active { transform: translateY(0); }
+
+  /* ── ESTILOS DE IMPRESIÓN ── */
+  @media print {
+    body { background: white; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 0; }
+    .header-stripe, .progress-wrap, .print-bar { display: none !important; }
+    .main { padding: 24px 32px; }
+    .question-card, .intro-block, .nota-final, .caso-block, .prompt-editor, .resultado-editor { break-inside: avoid; box-shadow: none; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .prompt-textarea, .resultado-textarea { background: white !important; border: 1px solid #ccc !important; color: var(--navy) !important; }
+    .table-row { break-inside: avoid; }
+    .divider { margin: 24px 0; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 24px; }
+    .main { padding: 36px 20px 60px; }
+    .frase-block { padding: 28px 22px; }
+    .header-meta { gap: 16px; }
+    .caso-block { padding: 20px 22px; }
+    .print-bar { flex-direction: column; text-align: center; }
+    .print-bar-left { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 4 · Actividad 1</div>
+    <h1>Selección de la <em>herramienta</em> óptima</h1>
+    <p class="header-sub">Diagnóstico aplicado — Sin entrega formal</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>25–35 min</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — consulta libre</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="intro-block">
+    <p>En la Lección 1 se ha presentado el mapa de herramientas de IA generativa organizadas en tres categorías: <strong>texto, audio (transcripción) y apoyo visual.</strong> Conocer ese mapa es un primer paso, pero el valor real aparece cuando se aplica a una situación concreta: ante una tarea del centro, ¿qué herramienta conviene usar? ¿Basta con una o se necesita combinar varias? ¿Hay algún caso en el que la IA no sea la mejor opción?</p>
+    <p>Esta actividad propone tres situaciones habituales de un centro sociosanitario. En cada una, se pide analizar la tarea, seleccionar la herramienta o combinación de herramientas más adecuada y justificar la elección. En la segunda parte, se prueba la herramienta con un caso real simplificado. No hay una respuesta única correcta: lo que importa es el razonamiento detrás de la decisión.</p>
+  </div>
+
+  <!-- PROGRESO -->
+  <div class="progress-wrap">
+    <span class="progress-label-text" id="progress-label">0 / 3 partes completadas</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ PARTE 1 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 1</span>
+    <span class="section-title">Tres situaciones, tres decisiones</span>
+  </div>
+  <p class="section-desc">A continuación se presentan tres situaciones que podrían darse cualquier día en un centro sociosanitario. Para cada una, se pide identificar qué tipo de herramienta sería más útil, indicar qué herramienta concreta se usaría y explicar brevemente por qué.</p>
+
+  <!-- SITUACIÓN A -->
+  <div class="caso-block">
+    <div class="caso-label">Situación A — La reunión que no queda en ningún sitio</div>
+    <p>El equipo de atención directa del centro se reúne cada miércoles durante treinta minutos para revisar incidencias de la semana y coordinar cambios en las pautas de intervención. La reunión es productiva: se toman decisiones, se reparten tareas, se comentan situaciones concretas de personas usuarias. Pero no queda constancia escrita. Nadie tiene tiempo de tomar notas completas durante la reunión, y las actas que se redactan después son escuetas y pierden la mayor parte de lo comentado. La dirección del centro ha pedido que se mejore el registro de estas reuniones.</p>
+  </div>
+
+  <div class="questions-grid">
+    <div class="question-card">
+      <span class="question-num">A1</span>
+      <p class="question-text">¿Qué herramienta o combinación de herramientas sería más adecuada para esta situación? ¿Qué pasos seguirías, en qué orden?</p>
+      <textarea class="question-input q-p1" rows="3" placeholder="Ej: Primero usaría una herramienta de transcripción para..." oninput="updateProgress()"></textarea>
+    </div>
+    <div class="question-card">
+      <span class="question-num">A2</span>
+      <p class="question-text">¿Hay alguna precaución que debas tener en cuenta antes de usar la herramienta elegida?</p>
+      <textarea class="question-input q-p1" rows="2" placeholder="Piensa en privacidad, consentimiento, datos de personas usuarias..." oninput="updateProgress()"></textarea>
+    </div>
+  </div>
+
+  <!-- SITUACIÓN B -->
+  <div class="caso-block">
+    <div class="caso-label">Situación B — El protocolo que nadie entiende</div>
+    <p>El centro acaba de actualizar su protocolo de actuación ante caídas. El documento, redactado por el equipo de calidad, tiene doce páginas con lenguaje técnico-normativo. El responsable del centro necesita que el contenido esencial de ese protocolo llegue a todo el personal de atención directa de forma clara y rápida: un resumen operativo que incluya los pasos concretos a seguir y los criterios de derivación. También necesita un cartel visual para colocar en las zonas comunes del centro con los tres o cuatro pasos más importantes.</p>
+  </div>
+
+  <div class="questions-grid">
+    <div class="question-card">
+      <span class="question-num">B1</span>
+      <p class="question-text">¿Qué herramienta o combinación de herramientas utilizarías? ¿Abordarías las dos necesidades (resumen y cartel) con la misma herramienta o con herramientas distintas?</p>
+      <textarea class="question-input q-p1" rows="3" placeholder="Ej: Para el resumen operativo usaría... y para el cartel..." oninput="updateProgress()"></textarea>
+    </div>
+    <div class="question-card">
+      <span class="question-num">B2</span>
+      <p class="question-text">¿Qué limitaciones prevés en el resultado que genere la herramienta?</p>
+      <textarea class="question-input q-p1" rows="2" placeholder="Piensa en qué necesitará revisión o ajuste manual..." oninput="updateProgress()"></textarea>
+    </div>
+  </div>
+
+  <!-- SITUACIÓN C -->
+  <div class="caso-block">
+    <div class="caso-label">Situación C — La nota de turno que se complica</div>
+    <p>Un auxiliar termina el turno de noche en una residencia de personas mayores. Durante el turno ha habido dos incidencias: una persona usuaria con un episodio de agitación nocturna que ha requerido intervención y una caída leve en el baño sin consecuencias aparentes. El auxiliar tiene que registrar ambas incidencias antes de irse, pero lleva retraso y los detalles empiezan a difuminarse. Necesita redactar dos notas de incidencia con precisión: una para el equipo del turno de mañana y otra para el registro formal del centro.</p>
+  </div>
+
+  <div class="questions-grid">
+    <div class="question-card">
+      <span class="question-num">C1</span>
+      <p class="question-text">¿Qué herramienta elegirías para esta tarea? ¿Usarías la misma para las dos notas o no?</p>
+      <textarea class="question-input q-p1" rows="3" placeholder="Ej: Para esta situación usaría..." oninput="updateProgress()"></textarea>
+    </div>
+    <div class="question-card">
+      <span class="question-num">C2</span>
+      <p class="question-text">¿En qué casos esta tarea se haría más rápido sin IA?</p>
+      <textarea class="question-input q-p1" rows="2" placeholder="Piensa en cuándo la herramienta añade más pasos de los que ahorra..." oninput="updateProgress()"></textarea>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════ PARTE 2 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 2</span>
+    <span class="section-title">Prueba con una herramienta real</span>
+  </div>
+  <p class="section-desc">De las tres situaciones anteriores, elige una. Con la herramienta que has seleccionado en la Parte 1, realiza una prueba real simplificada: abre la herramienta, escribe el prompt que utilizarías para resolver la situación (aplicando el modelo ROCI trabajado en la Sección 3) y copia aquí tanto el prompt como el resultado obtenido. No es necesario que el resultado sea perfecto; lo que interesa es observar cómo responde la herramienta a la tarea y si la elección ha sido adecuada.</p>
+
+  <div class="prompt-editor">
+    <div class="prompt-editor-label">
+      <span class="badge-ok">Tu prompt</span>
+      Instrucción enviada a la herramienta elegida
+    </div>
+    <textarea class="prompt-textarea" id="prompt-prueba" placeholder="Escribe aquí la instrucción que has enviado a la herramienta de IA..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <p class="section-desc" style="margin-top: 24px;">Pega aquí el resultado que ha generado la herramienta:</p>
+
+  <div class="resultado-editor">
+    <div class="resultado-label">
+      <span class="resultado-badge">Resultado</span>
+      Respuesta generada por la IA
+    </div>
+    <textarea class="resultado-textarea" id="resultado-prueba" placeholder="Copia y pega aquí el texto o describe el resultado que ha generado la herramienta..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="questions-grid" style="margin-top: 24px;">
+    <div class="question-card">
+      <span class="question-num">01</span>
+      <p class="question-text">¿La herramienta elegida ha sido la adecuada para esta tarea? ¿Cambiarías algo en tu elección?</p>
+      <textarea class="question-input q-p2" rows="2" placeholder="Valora si tu elección ha funcionado o si otra herramienta habría sido mejor..." oninput="updateProgress()"></textarea>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════ PARTE 3 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 3</span>
+    <span class="section-title">Reflexión</span>
+  </div>
+  <p class="section-desc">Ahora que has analizado tres situaciones y probado una herramienta, es el momento de pensar en tu propio contexto profesional.</p>
+
+  <div class="questions-grid">
+    <div class="question-card">
+      <span class="question-num">01</span>
+      <p class="question-text">De las tres categorías de herramientas (texto, audio, visual), ¿cuál crees que tendría más impacto en tu trabajo diario real? ¿Por qué?</p>
+      <textarea class="question-input q-p3" rows="2" placeholder="Piensa en las tareas que más tiempo te ocupan..." oninput="updateProgress()"></textarea>
+    </div>
+    <div class="question-card">
+      <span class="question-num">02</span>
+      <p class="question-text">¿Has descubierto alguna herramienta en la Lección 1 que no conocías y que te gustaría probar? ¿Cuál y para qué tarea concreta?</p>
+      <textarea class="question-input q-p3" rows="2" placeholder="Ej: No conocía Notta y me gustaría probarla para..." oninput="updateProgress()"></textarea>
+    </div>
+    <div class="question-card">
+      <span class="question-num">03</span>
+      <p class="question-text">¿En qué situación de tu jornada habitual la IA NO sería la mejor opción y sería más rápido resolver la tarea sin ella?</p>
+      <textarea class="question-input q-p3" rows="2" placeholder="Piensa en tareas donde la IA añadiría más pasos de los que ahorra..." oninput="updateProgress()"></textarea>
+    </div>
+  </div>
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-label">Frase de cierre</div>
+    <div class="frase-stem">
+      <em>«La herramienta adecuada no es la más potente, sino la que encaja con la tarea, el tiempo disponible y el resultado que se necesita. A veces es un chat de IA; a veces,...</em>
+    </div>
+    <textarea class="frase-input" rows="3" placeholder="...completa con lo primero que te venga" oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <div class="nota-icon">📌</div>
+    <div class="nota-text">
+      <strong>¿Para qué sirve esto?</strong> Esta actividad conecta el mapa de herramientas de la Lección 1 con decisiones reales de tu entorno de trabajo. Elegir bien la herramienta antes de empezar a usarla es una competencia que se entrena, y que evita perder tiempo con la opción equivocada. En la Lección 2 se verán los criterios para decidir entre versiones gratuitas y de pago, y en la Lección 3 se abordará cuándo la IA ahorra tiempo real y cuándo no. Guarda tus respuestas: te servirán como referencia.
+    </div>
+  </div>
+
+  <!-- BOTÓN PDF -->
+  <div class="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div>
+
+<script>
+  function updateProgress() {
+    // Parte 1: al menos 4 de las 6 preguntas de situaciones rellenadas
+    var p1Inputs = document.querySelectorAll('.q-p1');
+    var p1Count = 0;
+    p1Inputs.forEach(function(el) {
+      if (el.value.trim().length > 10) p1Count++;
+    });
+    var parte1 = p1Count >= 4;
+
+    // Parte 2: prompt + resultado + valoración
+    var promptPrueba = document.getElementById('prompt-prueba');
+    var resultPrueba = document.getElementById('resultado-prueba');
+    var p2Inputs = document.querySelectorAll('.q-p2');
+    var p2Count = 0;
+    p2Inputs.forEach(function(el) {
+      if (el.value.trim().length > 5) p2Count++;
+    });
+    var parte2 = promptPrueba.value.trim().length > 20 && resultPrueba.value.trim().length > 20 && p2Count >= 1;
+
+    // Parte 3: al menos 2 preguntas de reflexión + frase de cierre
+    var p3Inputs = document.querySelectorAll('.q-p3');
+    var p3Count = 0;
+    p3Inputs.forEach(function(el) {
+      if (el.value.trim().length > 5) p3Count++;
+    });
+    var frase = document.querySelector('.frase-input');
+    var parte3 = p3Count >= 2 && frase && frase.value.trim().length > 5;
+
+    var completed = [parte1, parte2, parte3].filter(Boolean).length;
+    var pct = (completed / 3) * 100;
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = completed + ' / 3 partes completadas';
+  }
+</script>
+
+</body>
+</html>
