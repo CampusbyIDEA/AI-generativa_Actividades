@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría de un texto generado — Actividad 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  h1 em {
+    color: var(--yellow);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .meta-item {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .meta-item strong {
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 44px 40px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    border-left: 4px solid var(--teal);
+    background: var(--white);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+  }
+  .intro-block p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 10px;
+  }
+  .intro-block p:last-child { margin-bottom: 0; }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+  .progress-label-text {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--camel-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .section-number {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  /* ── PROMPT CARD ── */
+  .prompt-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .prompt-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .prompt-card-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  /* ── CALLOUT ── */
+  .callout-block {
+    background: rgba(252,222,6,0.10);
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 8px 8px 0;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+  }
+  .callout-block p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .callout-block strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── TABLE ── */
+  .table-wrapper {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,47,72,0.06);
+    margin-bottom: 28px;
+  }
+  .table-header-audit {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 1fr;
+    background: var(--navy);
+  }
+  .table-row-audit {
+    display: grid;
+    grid-template-columns: 1.3fr 0.8fr 1fr;
+    border-bottom: 1px solid var(--line);
+    background: var(--white);
+  }
+  .table-row-audit:nth-child(even) { background: #FAFAF7; }
+  .table-row-audit:last-child { border-bottom: none; }
+  .th {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--white);
+    padding: 12px 14px;
+    letter-spacing: 0.04em;
+  }
+  .td {
+    padding: 14px;
+    font-size: 13px;
+    border-right: 1px solid var(--line);
+    display: flex;
+    align-items: flex-start;
+  }
+  .td:last-child { border-right: none; }
+  .td-edit {
+    width: 100%;
+    min-height: 56px;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  .td-edit:empty::before {
+    content: attr(data-placeholder);
+    color: var(--camel-mid);
+    font-style: italic;
+    pointer-events: none;
+  }
+
+  /* ── QUESTIONS ── */
+  .questions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .question-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 24px 26px;
+    box-shadow: 0 1px 4px rgba(0,47,72,0.05);
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-light);
+    margin-bottom: 14px;
+  }
+  .question-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--camel-light);
+    background: transparent;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--navy);
+    padding: 8px 0;
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s;
+  }
+  .question-input:focus { border-color: var(--teal); }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 32px 28px;
+    margin-bottom: 0;
+  }
+  .frase-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+  }
+  .frase-stem {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .frase-input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    color: var(--white);
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    padding: 14px 16px;
+    outline: none;
+    resize: none;
+    line-height: 1.6;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .frase-input::placeholder {
+    color: rgba(255,255,255,0.25);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  .frase-input:focus {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(252,222,6,0.35);
+  }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--camel-light);
+  }
+  .nota-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .nota-text {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .nota-text strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+
+  /* ── BOTÓN PDF ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-top: 32px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 16px; }
+  .print-icon { font-size: 22px; flex-shrink: 0; }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .print-btn:active { transform: translateY(0); }
+
+  /* ── ESTILOS DE IMPRESIÓN ── */
+  @media print {
+    body { background: white; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 0; }
+    .header-stripe, .progress-wrap, .print-bar { display: none !important; }
+    .main { padding: 24px 32px; }
+    .table-wrapper { box-shadow: none; overflow: visible; }
+    .question-card, .intro-block, .nota-final, .callout-block { break-inside: avoid; box-shadow: none; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .td-edit { min-height: 0 !important; padding: 4px 8px !important; }
+    .table-row-audit { break-inside: avoid; }
+    .table-header-audit, .table-row-audit:nth-child(even) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .divider { margin: 24px 0; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 24px; }
+    .main { padding: 36px 20px 60px; }
+    .table-header-audit, .table-row-audit {
+      grid-template-columns: 1fr;
+    }
+    .frase-block { padding: 28px 22px; }
+    .header-meta { gap: 16px; }
+    .print-bar { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 5 · Actividad 1</div>
+    <h1>Auditoría de un texto <em>generado</em></h1>
+    <p class="header-sub">Detectar datos inventados en un registro producido por IA</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>10–15 min</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — ChatGPT, Copilot, Gemini, Claude u otra similar</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="intro-block">
+    <p>En la Lección 1 de esta sección se ha visto que la IA no avisa cuando se inventa algo: presenta los datos fabricados con la misma estructura y la misma seguridad que los datos correctos.</p>
+    <p>Esta actividad pone eso a prueba con un caso concreto. Se va a pedir a la IA que redacte un registro de incidencia <strong>incluyendo información que no se le proporciona.</strong> La pregunta es: ¿qué hace la IA cuando le falta un dato? ¿Lo omite, lo señala o lo inventa?</p>
+  </div>
+
+  <!-- PROGRESO -->
+  <div class="progress-wrap">
+    <span class="progress-label-text" id="progress-label">0 / 3 partes completadas</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ PARTE 1 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 1</span>
+    <span class="section-title">Generar el texto</span>
+  </div>
+  <p class="section-desc">Copia la siguiente instrucción y envíala a una herramienta de IA. Es importante enviarla exactamente como está, sin añadir información adicional.</p>
+
+  <div class="prompt-card">
+    <div class="prompt-card-label">Instrucción para copiar y enviar</div>
+    <div class="prompt-card-text">
+      «Redacta un registro de incidencia para un turno de noche en un centro residencial de personas mayores. Una usuaria con deterioro cognitivo se ha levantado de la cama a las tres de la madrugada, se la ha encontrado desorientada en el pasillo y se la ha acompañado de vuelta a su habitación sin incidentes. Incluye la medicación nocturna que podría estar relacionada y el protocolo del centro que se ha seguido. Tono profesional, formato de registro interno.»
+    </div>
+  </div>
+
+  <div class="callout-block">
+    <p><strong>Antes de leer el resultado</strong>, fíjate en un detalle de la instrucción: se pide a la IA que incluya la medicación nocturna de la usuaria y el protocolo del centro. Pero no se le da ni una cosa ni la otra. La IA no tiene esos datos.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════ PARTE 2 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 2</span>
+    <span class="section-title">La auditoría</span>
+  </div>
+  <p class="section-desc">Lee el texto que ha generado la IA y busca datos que haya podido inventar. Para cada dato sospechoso, anota el fragmento, indica si estaba en la instrucción original y explica por qué podría ser un dato fabricado.</p>
+
+  <div class="table-wrapper">
+    <div class="table-header-audit">
+      <div class="th">Fragmento sospechoso</div>
+      <div class="th">¿Estaba en la instrucción?</div>
+      <div class="th">¿Por qué podría ser inventado?</div>
+    </div>
+    <div class="table-row-audit">
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Copiar o parafrasear el fragmento del texto generado..." oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Sí / No" oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Explica por qué sospechas que es inventado..." oninput="updateProgress()"></div></div>
+    </div>
+    <div class="table-row-audit">
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Copiar o parafrasear el fragmento del texto generado..." oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Sí / No" oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Explica por qué sospechas que es inventado..." oninput="updateProgress()"></div></div>
+    </div>
+    <div class="table-row-audit">
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Copiar o parafrasear el fragmento del texto generado..." oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Sí / No" oninput="updateProgress()"></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Explica por qué sospechas que es inventado..." oninput="updateProgress()"></div></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════ PARTE 3 ══════════════════════════════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 3</span>
+    <span class="section-title">Reflexión</span>
+  </div>
+  <p class="section-desc">Con el texto auditado, es el momento de valorar qué ha pasado y qué implica.</p>
+
+  <div class="questions-grid">
+    <div class="question-card">
+      <span class="question-num">01</span>
+      <p class="question-text">¿La IA ha avisado de que no tenía los datos de medicación o de protocolo, o los ha inventado sin decirlo?</p>
+      <textarea class="question-input" rows="3" placeholder="Describe qué ha hecho la IA con la información que no tenía..." oninput="updateProgress()"></textarea>
+    </div>
+    <div class="question-card">
+      <span class="question-num">02</span>
+      <p class="question-text">Si este registro se incorporara al expediente de la persona usuaria tal como lo ha generado la IA, ¿qué consecuencias podría tener el dato de medicación inventado?</p>
+      <textarea class="question-input" rows="3" placeholder="Piensa en quién leería después ese registro y qué decisiones podría tomar..." oninput="updateProgress()"></textarea>
+    </div>
+  </div>
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-label">Frase de cierre</div>
+    <div class="frase-stem">
+      <em>«La próxima vez que pida a la IA información que no le he dado, lo que haré será...</em>
+    </div>
+    <textarea class="frase-input" rows="3" placeholder="...completa la frase con tu propia conclusión" oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <div class="nota-icon">📌</div>
+    <div class="nota-text">
+      <strong>¿Para qué sirve esto?</strong> Esta actividad conecta dos ideas trabajadas en secciones anteriores: la calidad de la instrucción determina la calidad del resultado (Sección 3), y todo texto generado por IA es un borrador que requiere revisión profesional (Sección 2). Lo que se ha visto aquí es el mecanismo concreto por el que se producen las alucinaciones más peligrosas: no cuando la IA falla, sino cuando se le pide algo que no tiene y lo rellena en silencio. En la Actividad 2 se trabajará el paso siguiente: corregir y mejorar un texto generado hasta dejarlo en condiciones de uso profesional.
+    </div>
+  </div>
+
+  <!-- BOTÓN PDF -->
+  <div class="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div>
+
+<script>
+  function updateProgress() {
+    // Parte 1: se marca si hay al menos 1 fila con contenido en la tabla
+    const rows = document.querySelectorAll('.table-row-audit');
+    let filasCompletas = 0;
+    rows.forEach(row => {
+      const celdas = row.querySelectorAll('.td-edit');
+      let celdasLlenas = 0;
+      celdas.forEach(c => {
+        if (c.innerText.trim().length > 2) celdasLlenas++;
+      });
+      if (celdasLlenas >= 3) filasCompletas++;
+    });
+    const parte1 = filasCompletas >= 1;
+    const parte2 = filasCompletas >= 2;
+
+    // Parte 3: al menos 1 pregunta + frase de cierre
+    const qs = document.querySelectorAll('.question-input');
+    let qCount = 0;
+    qs.forEach(q => {
+      if (q.value.trim().length > 5) qCount++;
+    });
+    const frase = document.querySelector('.frase-input');
+    const parte3 = qCount >= 1 && frase && frase.value.trim().length > 5;
+
+    const completed = [parte1, parte2, parte3].filter(Boolean).length;
+    const pct = (completed / 3) * 100;
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = `${completed} / 3 partes completadas`;
+  }
+</script>
+
+</body>
+</html>
