@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De la nota suelta al registro formal — Actividad 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  h1 em {
+    color: var(--yellow);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .meta-item {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .meta-item strong {
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 44px 40px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    border-left: 4px solid var(--teal);
+    background: var(--white);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+  }
+  .intro-block p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 10px;
+  }
+  .intro-block p:last-child { margin-bottom: 0; }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+  .progress-label-text {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--camel-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .section-number {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  /* ── NOTAS DE TURNO ── */
+  .notas-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .notas-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .notas-text {
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .notas-text p {
+    margin-bottom: 12px;
+  }
+  .notas-text p:last-child { margin-bottom: 0; }
+
+  /* ── CALLOUT ── */
+  .callout-block {
+    background: rgba(252,222,6,0.10);
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 8px 8px 0;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+  }
+  .callout-block p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  .callout-block strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── QUESTION CARD ── */
+  .question-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 24px 26px;
+    box-shadow: 0 1px 4px rgba(0,47,72,0.05);
+    margin-bottom: 20px;
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-light);
+    margin-bottom: 14px;
+  }
+  .question-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--camel-light);
+    background: transparent;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--navy);
+    padding: 8px 0;
+    outline: none;
+    resize: none;
+    transition: border-color 0.2s;
+  }
+  .question-input:focus { border-color: var(--teal); }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .checklist-title {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-light);
+  }
+  .checklist-item:last-child { border-bottom: none; }
+  .checklist-bullet {
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--teal);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 32px 28px;
+    margin-bottom: 0;
+  }
+  .frase-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+  }
+  .frase-stem {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .frase-input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    color: var(--white);
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    padding: 14px 16px;
+    outline: none;
+    resize: none;
+    line-height: 1.6;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .frase-input::placeholder {
+    color: rgba(255,255,255,0.25);
+    font-style: italic;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  .frase-input:focus {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(252,222,6,0.35);
+  }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--camel-light);
+  }
+  .nota-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .nota-text {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .nota-text strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+
+  /* ── BOTÓN PDF ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-top: 32px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 16px; }
+  .print-icon { font-size: 22px; flex-shrink: 0; }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .print-btn:active { transform: translateY(0); }
+
+  /* ── ESTILOS DE IMPRESIÓN ── */
+  @media print {
+    body { background: white; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 0; }
+    .header-stripe, .progress-wrap, .print-bar { display: none !important; }
+    .main { padding: 24px 32px; }
+    .question-card, .intro-block, .nota-final, .callout-block, .notas-block, .checklist { break-inside: avoid; box-shadow: none; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .divider { margin: 24px 0; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 24px; }
+    .main { padding: 36px 20px 60px; }
+    .frase-block { padding: 28px 22px; }
+    .header-meta { gap: 16px; }
+    .print-bar { flex-direction: column; align-items: flex-start; }
+    .notas-block { padding: 20px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 6 · Actividad 1</div>
+    <h1>De la nota suelta al registro <em>formal</em></h1>
+    <p class="header-sub">Transformar información dispersa en un registro estructurado y profesional</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>10–15 min</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — ChatGPT, Copilot, Gemini, Claude u otra similar</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="intro-block">
+    <p>Acaba de terminar un turno de noche complicado. Son las siete y cuarenta de la mañana, el equipo de día llega en veinte minutos y hay que dejar el registro hecho.</p>
+    <p>Las notas están en un papel arrugado, escritas entre una cosa y otra, sin orden ni estructura. Hay información relevante mezclada con recordatorios personales y datos a medias. La tarea es convertir esas notas en un <strong>registro de turno profesional</strong> utilizando la IA como herramienta de apoyo.</p>
+  </div>
+
+  <!-- PROGRESO -->
+  <div class="progress-wrap">
+    <span class="progress-label-text" id="progress-label">0 / 2 partes completadas</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ MATERIAL DE PARTIDA ══════════════════ -->
+  <div class="notas-block">
+    <div class="notas-label">Notas de turno — tal como aparecen en el papel</div>
+    <div class="notas-text">
+      <p>Carmen G. hab 12 — no dormía cuando pasé a las 2, dijo que le dolía la cadera. Le di paracetamol (el de las 22 no se lo había tomado, estaba en la mesilla). A las 3 seguía despierta, la acompañé al salón un rato, infusión. A las 4 ya dormida en su habitación.</p>
+      <p>Ojo — avisar a fisio lo de Carmen, lleva 3 noches con dolor.</p>
+      <p>Antonio M. hab 7 — se cayó a las 4:30 yendo al baño. Lo encontré en el suelo, consciente, sin herida visible. Le ayudé a levantarse, lo revisé. Sin dolor. Llamé a la dra. Pérez (guardia), dijo que observación y si dolor o mareo avisar. Anoté en hoja de caídas.</p>
+      <p>Recuerdo: pedir guantes talla M, se han acabado.</p>
+      <p>Resto del turno sin novedad. Ronda de las 5 todo ok. Medicación nocturna administrada a todos excepto Carmen (el paracetamol se lo di a las 2 cuando me dijo lo de la cadera).</p>
+    </div>
+  </div>
+
+  <div class="callout-block">
+    <p><strong>Antes de empezar</strong>, lee las notas con atención y separa mentalmente qué información es relevante para el registro y qué no lo es: los recordatorios personales y los avisos internos que van por otro canal no forman parte del registro de turno.</p>
+  </div>
+
+  <!-- ══════════════════ PARTE 1 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 1</span>
+    <span class="section-title">Construir la instrucción</span>
+  </div>
+  <p class="section-desc">A partir de las notas, construye una instrucción ROCI completa para que la IA genere el registro de turno. La instrucción debe incluir los cuatro elementos del modelo: rol profesional desde el que debe responder la IA, objetivo del registro y destinatario, contexto del turno y la situación, e instrucción concreta con las notas como material de partida.</p>
+
+  <div class="question-card">
+    <span class="question-num">01</span>
+    <p class="question-text">Escribe tu instrucción ROCI completa. Cuando la tengas, cópiala en la herramienta de IA que utilices habitualmente y genera el registro.</p>
+    <textarea class="question-input" rows="8" placeholder="Escribe aquí tu instrucción ROCI..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ PARTE 2 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 2</span>
+    <span class="section-title">Revisar, editar y firmar</span>
+  </div>
+  <p class="section-desc">Revisa el resultado que ha generado la IA aplicando los criterios de la Lección 1. Edítalo hasta que puedas firmarlo como propio y pega aquí la versión final.</p>
+
+  <div class="checklist">
+    <div class="checklist-title">Puntos de revisión</div>
+    <div class="checklist-item">
+      <span class="checklist-bullet">✓</span>
+      <span><strong>Precisión temporal</strong> — ¿Aparecen las horas correctas de cada incidencia? ¿La cronología es coherente?</span>
+    </div>
+    <div class="checklist-item">
+      <span class="checklist-bullet">✓</span>
+      <span><strong>Concreción factual</strong> — ¿El texto describe lo que ocurrió tal y como está en las notas, sin añadir interpretaciones?</span>
+    </div>
+    <div class="checklist-item">
+      <span class="checklist-bullet">✓</span>
+      <span><strong>Utilidad para el siguiente turno</strong> — ¿El profesional que lea esto por la mañana tiene todo lo que necesita? ¿Queda claro qué hay pendiente?</span>
+    </div>
+    <div class="checklist-item">
+      <span class="checklist-bullet">✓</span>
+      <span><strong>Terminología</strong> — ¿La IA ha añadido algún término clínico que no estaba en las notas originales? Si es así, ¿es correcto o es una sobrecalificación?</span>
+    </div>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">02</span>
+    <p class="question-text">Pega aquí tu registro final editado, listo para firmar.</p>
+    <textarea class="question-input" rows="10" placeholder="Pega aquí el registro editado..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-label">Frase de cierre</div>
+    <div class="frase-stem">
+      <em>«Lo más importante que he ajustado en el resultado de la IA ha sido...</em>
+    </div>
+    <textarea class="frase-input" rows="3" placeholder="...completa la frase con tu propia conclusión" oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <div class="nota-icon">📌</div>
+    <div class="nota-text">
+      <strong>¿Para qué sirve esto?</strong> Esta actividad pone en práctica el flujo completo de la Lección 1: de la nota suelta al registro formal. El valor no está en que la IA genere un texto bien redactado, sino en que el resultado final refleje con exactitud lo que ocurrió durante el turno. Guarda tu instrucción ROCI y tu registro editado: son ejemplos de tu propio proceso de trabajo que podrás reutilizar.
+    </div>
+  </div>
+
+  <!-- BOTÓN PDF -->
+  <div class="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div>
+
+<script>
+  function updateProgress() {
+    // Parte 1: instrucción ROCI escrita
+    const instruccion = document.querySelectorAll('.question-input')[0];
+    const parte1 = instruccion && instruccion.value.trim().length > 20;
+
+    // Parte 2: registro editado + frase de cierre
+    const registro = document.querySelectorAll('.question-input')[1];
+    const frase = document.querySelector('.frase-input');
+    const parte2 = registro && registro.value.trim().length > 20 && frase && frase.value.trim().length > 5;
+
+    const completed = [parte1, parte2].filter(Boolean).length;
+    const pct = (completed / 2) * 100;
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = completed + ' / 2 partes completadas';
+  }
+</script>
+
+</body>
+</html>
