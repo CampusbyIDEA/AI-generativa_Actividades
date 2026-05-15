@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Un mensaje, tres destinatarios — Actividad 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  h1 em {
+    color: var(--yellow);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .meta-item {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .meta-item strong {
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 44px 40px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    border-left: 4px solid var(--teal);
+    background: var(--white);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+  }
+  .intro-block p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 10px;
+  }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block strong { font-weight: 600; color: var(--navy); }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+  .progress-label-text {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--camel-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .section-number {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  /* ── SITUACIÓN ── */
+  .situacion-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .situacion-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .situacion-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .situacion-text p {
+    margin-bottom: 10px;
+  }
+  .situacion-text p:last-child { margin-bottom: 0; }
+
+  /* ── QUESTION CARDS ── */
+  .question-card {
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .question-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--camel-light);
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: transparent;
+    resize: vertical;
+    padding: 8px 0;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .question-input:focus {
+    border-color: var(--teal);
+  }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+  }
+
+  /* ── CALLOUT ── */
+  .callout-block {
+    background: rgba(252,222,6,0.10);
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 8px 8px 0;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+  }
+  .callout-block p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .callout-block strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 36px 32px;
+    margin-top: 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .frase-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .frase-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 16px;
+  }
+  .frase-stem {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .frase-input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--white);
+    padding: 14px 16px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .frase-input:focus { border-color: var(--yellow); }
+  .frase-input::placeholder { color: rgba(255,255,255,0.25); font-style: italic; }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--camel-light);
+  }
+  .nota-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .nota-text {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .nota-text strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+
+  /* ── BOTÓN PDF ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-top: 32px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 16px; }
+  .print-icon { font-size: 22px; flex-shrink: 0; }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .print-btn:active { transform: translateY(0); }
+
+  /* ── ESTILOS DE IMPRESIÓN ── */
+  @media print {
+    body { background: white; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 0; }
+    .header-stripe, .progress-wrap, .print-bar { display: none !important; }
+    .main { padding: 24px 32px; }
+    .question-card, .intro-block, .nota-final, .callout-block, .situacion-block { break-inside: avoid; box-shadow: none; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .divider { margin: 24px 0; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 24px; }
+    .main { padding: 36px 20px 60px; }
+    .frase-block { padding: 28px 22px; }
+    .header-meta { gap: 16px; }
+    .print-bar { flex-direction: column; align-items: flex-start; }
+    .situacion-block { padding: 20px 22px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 7 · Actividad 1</div>
+    <h1>Un mensaje, tres <em>destinatarios</em></h1>
+    <p class="header-sub">Adaptar una misma comunicación a familias y a personas con necesidades de accesibilidad</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>15–20 min</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — ChatGPT, Copilot, Gemini, Claude u otra similar</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="intro-block">
+    <p>A lo largo de esta sección se ha trabajado una idea central: <strong>el destinatario lo cambia todo</strong>. El mismo hecho se comunica de forma completamente distinta según quién va a leerlo.</p>
+    <p>En esta actividad se pone en práctica esa idea con un caso concreto: un cambio de horario de visitas que hay que comunicar a dos destinatarios diferentes.</p>
+  </div>
+
+  <!-- SITUACIÓN DE PARTIDA -->
+  <div class="situacion-block">
+    <div class="situacion-label">Situación de partida</div>
+    <div class="situacion-text">
+      <p>El centro ha decidido modificar el horario de visitas de familiares. A partir de la semana que viene, las visitas pasan de ser en horario libre (de diez de la mañana a ocho de la tarde) a concentrarse en dos franjas: de once a una del mediodía y de cinco a siete y media de la tarde.</p>
+      <p>El motivo es que las visitas en horario libre coincidían con momentos de descanso, actividades grupales y atención sanitaria, lo que generaba interrupciones frecuentes y dificultades para mantener las rutinas del centro.</p>
+      <p>La dirección quiere comunicar el cambio de forma clara, explicando las razones y ofreciendo una vía de contacto para dudas.</p>
+    </div>
+  </div>
+
+  <!-- PROGRESO -->
+  <div class="progress-wrap">
+    <span class="progress-label-text" id="progress-label">0 / 3 partes completadas</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PARTE 1 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 1</span>
+    <span class="section-title">Mensaje para familias</span>
+  </div>
+  <p class="section-desc">Construye una instrucción ROCI y genera un mensaje dirigido a las familias informando del cambio de horario. Recuerda lo trabajado en la Lección 1: el tono debe ser cercano pero profesional, la información debe ser completa sin ser excesiva, y el mensaje debe anticipar las preocupaciones que pueda generar el cambio.</p>
+
+  <div class="question-card">
+    <span class="question-num">01</span>
+    <p class="question-text">Pega aquí tu instrucción ROCI y el resultado generado. Si has hecho algún ajuste o iteración, pega la versión final.</p>
+    <textarea class="question-input" rows="8" placeholder="Instrucción ROCI + resultado generado..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ PARTE 2 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 2</span>
+    <span class="section-title">Versión accesible</span>
+  </div>
+  <p class="section-desc">Adapta el mismo mensaje para que pueda entenderlo una persona usuaria del centro con dificultades de comprensión lectora. Aplica los criterios de lectura fácil trabajados en la Lección 2: frases cortas, una idea por frase, palabras sencillas, estructura predecible.</p>
+
+  <div class="callout-block">
+    <p>No hace falta construir una instrucción ROCI nueva desde cero. Basta con pedir a la IA que adapte el mensaje anterior a formato de lectura fácil, indicando el perfil del destinatario.</p>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">02</span>
+    <p class="question-text">Pega aquí la versión en lectura fácil.</p>
+    <textarea class="question-input" rows="8" placeholder="Versión accesible del mensaje..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ PARTE 3 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 3</span>
+    <span class="section-title">Compara</span>
+  </div>
+  <p class="section-desc">Mira las dos versiones una al lado de la otra y responde a estas dos preguntas.</p>
+
+  <div class="question-card">
+    <span class="question-num">03</span>
+    <p class="question-text">¿Qué ha cambiado entre las dos versiones en vocabulario, extensión y tono? Señala un ejemplo concreto de cada diferencia.</p>
+    <textarea class="question-input" rows="4" placeholder="Diferencias que observas entre ambas versiones..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">04</span>
+    <p class="question-text">Si tuvieras que comunicar este mismo cambio a la administración autonómica (por ejemplo, porque afecta al régimen de visitas recogido en el reglamento del centro), ¿qué cambiaría en el registro del texto? No es necesario generarlo; basta con describir en dos o tres frases qué ajustes serían necesarios.</p>
+    <textarea class="question-input" rows="4" placeholder="Qué cambiarías para un destinatario institucional..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-label">Frase de cierre</div>
+    <div class="frase-stem">
+      <em>«Lo que más cambia cuando adapto un mensaje a otro destinatario no es el contenido, sino...</em>
+    </div>
+    <textarea class="frase-input" rows="3" placeholder="...completa la frase con tu propia conclusión" oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <div class="nota-icon">📌</div>
+    <div class="nota-text">
+      <strong>¿Para qué sirve esto?</strong> Esta actividad pone en práctica el eje central de la Sección 7: un mismo hecho se comunica de formas muy distintas según quién va a leerlo. La instrucción ROCI es la misma herramienta de siempre; lo que cambia es el bloque de Instrucción. Guarda tus versiones: son ejemplos de tu propio proceso de adaptación que pueden servirte como referencia para comunicaciones reales en el centro.
+    </div>
+  </div>
+
+  <!-- BOTÓN PDF -->
+  <div class="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div>
+
+<script>
+  function updateProgress() {
+    // Parte 1: instrucción ROCI + resultado
+    var q1 = document.querySelectorAll('.question-input')[0];
+    var parte1 = q1 && q1.value.trim().length > 20;
+
+    // Parte 2: versión accesible
+    var q2 = document.querySelectorAll('.question-input')[1];
+    var parte2 = q2 && q2.value.trim().length > 20;
+
+    // Parte 3: al menos 1 de 2 preguntas de comparación + frase de cierre
+    var q3 = document.querySelectorAll('.question-input')[2];
+    var q4 = document.querySelectorAll('.question-input')[3];
+    var frase = document.querySelector('.frase-input');
+    var parte3 = (q3 && q3.value.trim().length > 10 || q4 && q4.value.trim().length > 10) && frase && frase.value.trim().length > 5;
+
+    var completed = [parte1, parte2, parte3].filter(Boolean).length;
+    var pct = (completed / 3) * 100;
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = completed + ' / 3 partes completadas';
+  }
+</script>
+
+</body>
+</html>
