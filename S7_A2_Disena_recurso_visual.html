@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diseña un recurso visual para tu centro — Actividad 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  h1 em {
+    color: var(--yellow);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .meta-item {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .meta-item strong {
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 44px 40px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    border-left: 4px solid var(--teal);
+    background: var(--white);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+  }
+  .intro-block p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 10px;
+  }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block strong { font-weight: 600; color: var(--navy); }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+  .progress-label-text {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--camel-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .section-number {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  /* ── SITUACIÓN ── */
+  .situacion-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .situacion-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .situacion-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .situacion-text p {
+    margin-bottom: 10px;
+  }
+  .situacion-text p:last-child { margin-bottom: 0; }
+
+  /* ── QUESTION CARDS ── */
+  .question-card {
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .question-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--camel-light);
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: transparent;
+    resize: vertical;
+    padding: 8px 0;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .question-input:focus {
+    border-color: var(--teal);
+  }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+  }
+
+  /* ── CALLOUT ── */
+  .callout-block {
+    background: rgba(252,222,6,0.10);
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 8px 8px 0;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+  }
+  .callout-block p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .callout-block strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+  .checklist li {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-light);
+    padding: 6px 0 6px 28px;
+    position: relative;
+  }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--teal);
+    border-radius: 3px;
+  }
+  .checklist li strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 36px 32px;
+    margin-top: 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .frase-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .frase-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 16px;
+  }
+  .frase-stem {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .frase-input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--white);
+    padding: 14px 16px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .frase-input:focus { border-color: var(--yellow); }
+  .frase-input::placeholder { color: rgba(255,255,255,0.25); font-style: italic; }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--camel-light);
+  }
+  .nota-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .nota-text {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .nota-text strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+
+  /* ── BOTÓN PDF ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-top: 32px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 16px; }
+  .print-icon { font-size: 22px; flex-shrink: 0; }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .print-btn:active { transform: translateY(0); }
+
+  /* ── ESTILOS DE IMPRESIÓN ── */
+  @media print {
+    body { background: white; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 0; }
+    .header-stripe, .progress-wrap, .print-bar { display: none !important; }
+    .main { padding: 24px 32px; }
+    .question-card, .intro-block, .nota-final, .callout-block, .situacion-block { break-inside: avoid; box-shadow: none; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .divider { margin: 24px 0; }
+    .checklist li::before { border-color: #333; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 24px; }
+    .main { padding: 36px 20px 60px; }
+    .frase-block { padding: 28px 22px; }
+    .header-meta { gap: 16px; }
+    .print-bar { flex-direction: column; align-items: flex-start; }
+    .situacion-block { padding: 20px 22px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 7 · Actividad 2</div>
+    <h1>Diseña un recurso <em>visual</em> para tu centro</h1>
+    <p class="header-sub">Identificar una necesidad real y usar el flujo en dos fases para crear un material visual con IA</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>20–25 min</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — ChatGPT, Copilot, Gemini, Claude u otra similar</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="intro-block">
+    <p>A lo largo de esta sección se ha trabajado la comunicación adaptada a distintos destinatarios. En la Lección 4 se ha dado un paso más: <strong>hay situaciones en las que el texto no es el formato adecuado</strong> y lo que se necesita es un material visual.</p>
+    <p>Esta actividad pide identificar una de esas situaciones en tu propio centro y aplicar el flujo en dos fases: primero, usar la IA de texto para preparar la instrucción visual; después, llevar esa instrucción a una herramienta de generación de imágenes o de diseño para producir el material.</p>
+  </div>
+
+  <!-- SITUACIÓN DE PARTIDA -->
+  <div class="situacion-block">
+    <div class="situacion-label">Situación de partida</div>
+    <div class="situacion-text">
+      <p>Cada centro tiene necesidades visuales que no están cubiertas. Puede ser un cartel que lleva meses pendiente, un horario que solo existe en un folio escrito a mano, una ficha de actividades que nunca se llegó a preparar, una señalización que no funciona, o un panel informativo para familias en la recepción que sigue siendo un corcho con papeles sueltos.</p>
+      <p>El punto de partida de esta actividad es una necesidad real de tu centro. No se propone un caso ficticio: se pide que identifiques un material visual que falta o que podría mejorar en tu entorno de trabajo.</p>
+    </div>
+  </div>
+
+  <!-- PROGRESO -->
+  <div class="progress-wrap">
+    <span class="progress-label-text" id="progress-label">0 / 3 partes completadas</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PARTE 1 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 1</span>
+    <span class="section-title">Identifica la necesidad</span>
+  </div>
+  <p class="section-desc">Antes de abrir ninguna herramienta, hay que definir el encargo. Responde a estas tres preguntas para tener claro qué necesitas, para quién y de qué tipo de material se trata.</p>
+
+  <div class="question-card">
+    <span class="question-num">01</span>
+    <p class="question-text">¿Qué material visual necesita tu centro? Descríbelo brevemente: qué es, dónde se colocaría o se usaría, y qué función cumple.</p>
+    <textarea class="question-input" rows="5" placeholder="Por ejemplo: un cartel con el horario semanal de actividades para la sala común, una ficha visual de la rutina de higiene de manos para el baño, un panel informativo de bienvenida para familias en recepción..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">02</span>
+    <p class="question-text">¿A quién va dirigido? Indica el perfil del destinatario y, si es relevante, sus necesidades específicas de comprensión (deterioro cognitivo, dificultades lectoras, idioma diferente, etc.).</p>
+    <textarea class="question-input" rows="4" placeholder="Destinatario principal del material..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">03</span>
+    <p class="question-text">¿De qué tipo de material se trata según la clasificación de la Lección 4: cartelería informativa, ficha de apoyo a actividades, u otro? Si lo que necesita tu centro es un pictograma o material de comunicación aumentativa, explica por qué la IA no sería la herramienta adecuada y qué recurso profesional usarías en su lugar.</p>
+    <textarea class="question-input" rows="4" placeholder="Tipo de material y justificación..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ PARTE 2 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 2</span>
+    <span class="section-title">Prepara la instrucción con IA de texto</span>
+  </div>
+  <p class="section-desc">En la Lección 4 se ha visto que el profesional no necesita saber escribir prompts visuales. Lo que necesita es darle a la IA de texto la información real —qué material, para quién, dónde se usará— y pedirle que genere la instrucción para la herramienta de imagen o de diseño.</p>
+
+  <div class="callout-block">
+    <p>Esta es la <strong>fase 1</strong> del flujo. No escribas directamente el prompt visual. Dale a la IA de texto la información de la Parte 1 y pídele que genere la instrucción para la herramienta de imagen o de diseño. El resultado será más completo, porque la IA incluye especificaciones técnicas (contraste, tipografía, formato de impresión) que no habrías formulado por tu cuenta.</p>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">04</span>
+    <p class="question-text">Escribe lo que le has pedido a la IA de texto (la información sobre el material, el destinatario, el lugar de uso, las restricciones relevantes) y pega el prompt visual que ha generado como resultado.</p>
+    <textarea class="question-input" rows="10" placeholder="Lo que le he pedido a la IA de texto + el prompt visual que ha generado..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">05</span>
+    <p class="question-text">¿Has tenido que ajustar algo en la instrucción a la IA de texto para que el prompt visual fuera más preciso? Si es así, indica qué cambiaste y por qué.</p>
+    <textarea class="question-input" rows="4" placeholder="Ajustes realizados entre la primera versión y la definitiva..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ PARTE 3 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 3</span>
+    <span class="section-title">Produce y valida el material</span>
+  </div>
+  <p class="section-desc">Copia el prompt visual de la fase anterior en una herramienta de generación de imágenes (ChatGPT, Copilot, Gemini u otra) o utilízalo como base para montar el material en Canva u otra herramienta de diseño. Esta es la <strong>fase 2</strong> del flujo.</p>
+
+  <div class="question-card">
+    <span class="question-num">06</span>
+    <p class="question-text">Si has generado una imagen o un borrador visual, describe brevemente el resultado. Si no tienes acceso a una herramienta de generación de imágenes, describe cómo trasladarías el prompt a Canva o a la herramienta que utilices habitualmente.</p>
+    <textarea class="question-input" rows="6" placeholder="Resultado obtenido o plan para trasladarlo a la herramienta de diseño..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">07</span>
+    <p class="question-text">Aplica los cuatro criterios de validación de la Lección 4 al resultado:</p>
+    <ul class="checklist">
+      <li><strong>Adecuación al destinatario:</strong> ¿La persona a la que va dirigido el material entendería lo que ve?</li>
+      <li><strong>Claridad informativa:</strong> ¿El contenido se capta de un vistazo o acumula demasiada información?</li>
+      <li><strong>Coherencia con el centro:</strong> ¿El estilo encaja con la imagen del centro o desentona?</li>
+      <li><strong>Dignidad:</strong> Si incluye representaciones de personas, ¿son dignas y apropiadas?</li>
+    </ul>
+    <textarea class="question-input" rows="8" placeholder="Valoración de cada criterio..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-label">Frase de cierre</div>
+    <div class="frase-stem">
+      <em>«El material visual que más falta hace en mi centro es... y lo que más me ha aportado usar la IA para prepararlo ha sido...</em>
+    </div>
+    <textarea class="frase-input" rows="3" placeholder="...completa la frase con tu propia conclusión" oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <div class="nota-icon">📌</div>
+    <div class="nota-text">
+      <strong>¿Para qué sirve esto?</strong> Esta actividad cierra la Sección 7 conectando todo el recorrido: la elección del formato depende del destinatario, no de las preferencias del profesional. El flujo en dos fases —IA de texto para preparar la instrucción, herramienta visual para producir el material— es el mismo que puedes aplicar mañana para cualquier cartel, ficha o panel de tu centro. No es un ejercicio académico: es el primer paso de un material que puede estar en la pared de tu centro la semana que viene.
+    </div>
+  </div>
+
+  <!-- BOTÓN PDF -->
+  <div class="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div>
+
+<script>
+  function updateProgress() {
+    var inputs = document.querySelectorAll('.question-input');
+    var frase = document.querySelector('.frase-input');
+
+    // Parte 1: preguntas 01, 02, 03 (inputs 0, 1, 2)
+    var p1 = inputs[0] && inputs[0].value.trim().length > 15
+          && inputs[1] && inputs[1].value.trim().length > 10
+          && inputs[2] && inputs[2].value.trim().length > 10;
+
+    // Parte 2: pregunta 04 (input 3) — pregunta 05 es opcional
+    var p2 = inputs[3] && inputs[3].value.trim().length > 20;
+
+    // Parte 3: pregunta 06 o 07 (inputs 5, 6) + frase de cierre
+    var p3 = (inputs[5] && inputs[5].value.trim().length > 15
+           || inputs[6] && inputs[6].value.trim().length > 15)
+          && frase && frase.value.trim().length > 5;
+
+    var completed = [p1, p2, p3].filter(Boolean).length;
+    var pct = (completed / 3) * 100;
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = completed + ' / 3 partes completadas';
+  }
+</script>
+
+</body>
+</html>
