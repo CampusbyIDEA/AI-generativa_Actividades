@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De las incidencias al plan de acción — Actividad 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  h1 em {
+    color: var(--yellow);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 28px;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .meta-item {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .meta-item strong {
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 44px 40px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    border-left: 4px solid var(--teal);
+    background: var(--white);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 36px;
+  }
+  .intro-block p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 10px;
+  }
+  .intro-block p:last-child { margin-bottom: 0; }
+  .intro-block strong { font-weight: 600; color: var(--navy); }
+
+  /* ── SITUACIÓN ── */
+  .situacion-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .situacion-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+  }
+  .situacion-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .situacion-text p {
+    margin-bottom: 10px;
+  }
+  .situacion-text p:last-child { margin-bottom: 0; }
+
+  /* ── DATOS + BOTÓN COPIAR ── */
+  .datos-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .datos-header {
+    background: var(--navy);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .datos-header-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+  }
+  .datos-header-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+  }
+  .copy-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 28px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .copy-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .copy-btn:active { transform: translateY(0); }
+  .copy-btn.copied {
+    background: var(--teal);
+    color: var(--white);
+  }
+  .copy-icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .datos-table-wrap {
+    overflow-x: auto;
+    padding: 0;
+  }
+  .datos-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .datos-table thead th {
+    background: var(--teal-dark);
+    color: var(--white);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--navy);
+  }
+  .datos-table tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    line-height: 1.5;
+    color: var(--ink-light);
+  }
+  .datos-table tbody tr:nth-child(even) td {
+    background: rgba(245,243,239,0.5);
+  }
+  .datos-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .datos-table .td-num {
+    font-family: 'Crimson Text', serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--teal);
+    text-align: center;
+    width: 40px;
+  }
+  .datos-table .td-fecha { white-space: nowrap; width: 65px; }
+  .datos-table .td-turno { width: 70px; }
+  .datos-table .td-tipo { width: 130px; font-weight: 400; }
+  .datos-table .td-zona { width: 130px; }
+
+  .copy-hint {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 44px;
+  }
+  .progress-label-text {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--camel-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  .section-number {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout-block {
+    background: rgba(252,222,6,0.10);
+    border-left: 4px solid var(--yellow);
+    border-radius: 0 8px 8px 0;
+    padding: 18px 24px;
+    margin-bottom: 28px;
+  }
+  .callout-block p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+  .callout-block strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── QUESTION CARDS ── */
+  .question-card {
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .question-text {
+    font-size: 14px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+  .question-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--camel-light);
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: transparent;
+    resize: vertical;
+    padding: 8px 0;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .question-input:focus {
+    border-color: var(--teal);
+  }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 36px 32px;
+    margin-top: 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .frase-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .frase-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 16px;
+  }
+  .frase-stem {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .frase-input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--white);
+    padding: 14px 16px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .frase-input:focus { border-color: var(--yellow); }
+  .frase-input::placeholder { color: rgba(255,255,255,0.25); font-style: italic; }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--camel-light);
+  }
+  .nota-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .nota-text {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+  }
+  .nota-text strong {
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+
+  /* ── BOTÓN PDF ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    margin-top: 32px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 16px; }
+  .print-icon { font-size: 22px; flex-shrink: 0; }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .print-btn:active { transform: translateY(0); }
+
+  /* ── ESTILOS DE IMPRESIÓN ── */
+  @media print {
+    body { background: white; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 28px 0; }
+    .header-stripe, .progress-wrap, .print-bar, .copy-btn, .copy-hint { display: none !important; }
+    .main { padding: 24px 32px; }
+    .question-card, .intro-block, .nota-final, .callout-block, .situacion-block, .datos-block { break-inside: avoid; box-shadow: none; }
+    .datos-header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .datos-table thead th { background: var(--teal-dark) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .divider { margin: 24px 0; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 24px; }
+    .main { padding: 36px 20px 60px; }
+    .frase-block { padding: 28px 22px; }
+    .header-meta { gap: 16px; }
+    .print-bar { flex-direction: column; align-items: flex-start; }
+    .situacion-block { padding: 20px 22px; }
+    .datos-header { flex-direction: column; align-items: stretch; gap: 12px; }
+    .copy-btn { justify-content: center; }
+    h1 { font-size: 28px; }
+    .datos-table { font-size: 12px; }
+    .datos-table thead th { padding: 10px 8px; font-size: 10px; }
+    .datos-table tbody td { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 8 · Actividad 1</div>
+    <h1>De las incidencias al <em>plan de acción</em></h1>
+    <p class="header-sub">Recorrer el ciclo completo: analizar datos, detectar patrones y formalizar propuestas de mejora</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>40–50 min</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — ChatGPT, Copilot, Gemini, Claude u otra similar</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="intro-block">
+    <p>A lo largo de esta sección se ha trabajado una secuencia: primero <strong>organizar los datos</strong> para entender qué ocurre, después <strong>planificar acciones</strong> a partir de los hallazgos y, por último, <strong>formalizar una propuesta</strong> que pueda presentarse al equipo o a la dirección.</p>
+    <p>Esta actividad recorre las tres fases con un caso simulado. El material de partida son veinticinco registros de incidencias de un centro residencial. A partir de ellos, se pide usar la IA para analizar, proponer y redactar, aplicando lo aprendido en cada lección.</p>
+  </div>
+
+  <!-- SITUACIÓN DE PARTIDA -->
+  <div class="situacion-block">
+    <div class="situacion-label">Situación de partida</div>
+    <div class="situacion-text">
+      <p>Un centro residencial de personas mayores con sesenta plazas ha registrado veinticinco incidencias durante el mes de marzo. La coordinadora necesita preparar un informe para la reunión mensual con dirección, donde se revisan los datos del mes y se proponen medidas.</p>
+      <p>Los registros incluyen fecha, turno, tipo de incidencia, zona del centro y una breve descripción. Los nombres de las personas usuarias ya están anonimizados con códigos.</p>
+    </div>
+  </div>
+
+  <!-- BLOQUE DE DATOS -->
+  <div class="datos-block">
+    <div class="datos-header">
+      <div>
+        <div class="datos-header-title">Registros de incidencias — Marzo</div>
+        <div class="datos-header-sub">25 registros · Datos anonimizados</div>
+      </div>
+      <button class="copy-btn" id="copyBtn" onclick="copyData()">
+        <span class="copy-icon">📋</span>
+        Copiar datos para pegar en la IA
+      </button>
+    </div>
+    <div class="datos-table-wrap">
+      <table class="datos-table">
+        <thead>
+          <tr>
+            <th>N.º</th>
+            <th>Fecha</th>
+            <th>Turno</th>
+            <th>Tipo</th>
+            <th>Zona</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-num">1</td><td class="td-fecha">02/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Habitaciones ala A</td><td>P03 encontrada en el suelo junto a la cama. Sin lesiones aparentes. Refiere haber ido al baño.</td></tr>
+          <tr><td class="td-num">2</td><td class="td-fecha">03/03</td><td class="td-turno">Mañana</td><td class="td-tipo">Agitación</td><td class="td-zona">Sala común</td><td>P11 episodio de agitación durante el desayuno. Se calmó tras acompañamiento de auxiliar.</td></tr>
+          <tr><td class="td-num">3</td><td class="td-fecha">05/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Habitaciones ala B</td><td>P08 caída al levantarse. Hematoma en rodilla derecha. Avisado médico de guardia.</td></tr>
+          <tr><td class="td-num">4</td><td class="td-fecha">06/03</td><td class="td-turno">Tarde</td><td class="td-tipo">Conflicto entre usuarios</td><td class="td-zona">Sala de actividades</td><td>P04 y P15 discusión durante taller. Se separaron sin incidente mayor.</td></tr>
+          <tr><td class="td-num">5</td><td class="td-fecha">07/03</td><td class="td-turno">Mañana</td><td class="td-tipo">Error medicación</td><td class="td-zona">Enfermería</td><td>P12 recibió medicación de P13 por confusión de bandejas. Detectado antes de la toma. Sin consecuencias.</td></tr>
+          <tr><td class="td-num">6</td><td class="td-fecha">08/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Habitaciones ala B</td><td>P08 segunda caída en la semana. Contusión leve en cadera. Médico recomienda valorar barandillas.</td></tr>
+          <tr><td class="td-num">7</td><td class="td-fecha">09/03</td><td class="td-turno">Tarde</td><td class="td-tipo">Agitación</td><td class="td-zona">Sala común</td><td>P11 episodio de agitación a media tarde. Fin de semana. Sin actividad programada.</td></tr>
+          <tr><td class="td-num">8</td><td class="td-fecha">10/03</td><td class="td-turno">Mañana</td><td class="td-tipo">Incidencia técnica</td><td class="td-zona">Comedor</td><td>Avería en sistema de llamada de la mesa 3. Reportado a mantenimiento.</td></tr>
+          <tr><td class="td-num">9</td><td class="td-fecha">11/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Pasillo ala B</td><td>P19 caída en el pasillo camino al baño. Iluminación de emergencia insuficiente según auxiliar de turno.</td></tr>
+          <tr><td class="td-num">10</td><td class="td-fecha">12/03</td><td class="td-turno">Mañana</td><td class="td-tipo">Agitación</td><td class="td-zona">Habitaciones ala A</td><td>P06 se niega a levantarse. Muestra ansiedad. Coincide con cambio de medicación hace tres días.</td></tr>
+          <tr><td class="td-num">11</td><td class="td-fecha">13/03</td><td class="td-turno">Tarde</td><td class="td-tipo">Conflicto entre usuarios</td><td class="td-zona">Comedor</td><td>P04 y P15 nueva discusión, esta vez en el comedor. Auxiliar sugiere revisar distribución de mesas.</td></tr>
+          <tr><td class="td-num">12</td><td class="td-fecha">14/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Habitaciones ala B</td><td>P22 caída leve al intentar alcanzar el timbre de llamada. Sin lesiones.</td></tr>
+          <tr><td class="td-num">13</td><td class="td-fecha">15/03</td><td class="td-turno">Mañana</td><td class="td-tipo">Error medicación</td><td class="td-zona">Enfermería</td><td>Medicación de P09 preparada con dosis incorrecta. Detectado en el doble chequeo. Sin administración.</td></tr>
+          <tr><td class="td-num">14</td><td class="td-fecha">16/03</td><td class="td-turno">Tarde</td><td class="td-tipo">Agitación</td><td class="td-zona">Sala común</td><td>P11 y P06 episodios simultáneos de inquietud. Sábado por la tarde. Sin actividad programada.</td></tr>
+          <tr><td class="td-num">15</td><td class="td-fecha">16/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Habitaciones ala B</td><td>P08 tercera caída del mes. Médico indica valoración urgente de entorno y movilidad.</td></tr>
+          <tr><td class="td-num">16</td><td class="td-fecha">18/03</td><td class="td-turno">Mañana</td><td class="td-tipo">Incidencia técnica</td><td class="td-zona">Habitaciones ala B</td><td>Luz del baño de habitación 14 fundida. Reportado. No reparado en tres días.</td></tr>
+          <tr><td class="td-num">17</td><td class="td-fecha">19/03</td><td class="td-turno">Tarde</td><td class="td-tipo">Fuga/desorientación</td><td class="td-zona">Jardín</td><td>P17 encontrado en el jardín desorientado, había salido sin avisar. Puerta lateral no estaba asegurada.</td></tr>
+          <tr><td class="td-num">18</td><td class="td-fecha">20/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Pasillo ala B</td><td>P19 segunda caída en el pasillo. Misma zona que el 11/03. Auxiliar reitera problema de iluminación.</td></tr>
+          <tr><td class="td-num">19</td><td class="td-fecha">21/03</td><td class="td-turno">Mañana</td><td class="td-tipo">Agitación</td><td class="td-zona">Comedor</td><td>P11 rechaza el desayuno con agitación. Terapeuta sugiere revisar pauta de sueño.</td></tr>
+          <tr><td class="td-num">20</td><td class="td-fecha">22/03</td><td class="td-turno">Tarde</td><td class="td-tipo">Conflicto entre usuarios</td><td class="td-zona">Sala de actividades</td><td>P04 y P15 tercer conflicto. Auxiliar propone no coincidir en la misma actividad.</td></tr>
+          <tr><td class="td-num">21</td><td class="td-fecha">23/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Habitaciones ala A</td><td>P03 segunda caída del mes. Similar a la primera: camino al baño, sin lesiones.</td></tr>
+          <tr><td class="td-num">22</td><td class="td-fecha">23/03</td><td class="td-turno">Tarde</td><td class="td-tipo">Agitación</td><td class="td-zona">Sala común</td><td>P06 episodio de ansiedad. Sábado. Sin actividad programada en esa franja.</td></tr>
+          <tr><td class="td-num">23</td><td class="td-fecha">25/03</td><td class="td-turno">Mañana</td><td class="td-tipo">Error medicación</td><td class="td-zona">Enfermería</td><td>Falta de registro de administración de P20. Detectado en el cierre de turno.</td></tr>
+          <tr><td class="td-num">24</td><td class="td-fecha">27/03</td><td class="td-turno">Tarde</td><td class="td-tipo">Incidencia técnica</td><td class="td-zona">Habitaciones ala B</td><td>Timbre de llamada de habitación 16 no funciona. Segundo aviso a mantenimiento.</td></tr>
+          <tr><td class="td-num">25</td><td class="td-fecha">29/03</td><td class="td-turno">Noche</td><td class="td-tipo">Caída</td><td class="td-zona">Habitaciones ala B</td><td>P12 caída al bajar de la cama. Sin barandillas activadas. Auxiliar nocturno estaba atendiendo otra planta.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p class="copy-hint">Usa el botón «Copiar datos» para pegar los registros directamente en tu herramienta de IA.</p>
+
+  <!-- PROGRESO -->
+  <div class="progress-wrap">
+    <span class="progress-label-text" id="progress-label">0 / 3 partes completadas</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PARTE 1 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 1</span>
+    <span class="section-title">Organizar los datos</span>
+  </div>
+  <p class="section-desc">Copia los registros de incidencias y pégalos en tu herramienta de IA. Construye una instrucción ROCI que le pida organizar las incidencias: agrupar por tipo, por turno y por zona. No le pidas conclusiones todavía, solo organización.</p>
+
+  <div class="callout-block">
+    <p>Revisa el resultado antes de seguir. Comprueba que los totales cuadran y que no ha clasificado mal ninguna incidencia. Esta verificación es la fase de <strong>organizar</strong> trabajada en la Lección 1.</p>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">01</span>
+    <p class="question-text">Pega aquí tu instrucción ROCI y el resultado organizado que te ha devuelto la IA.</p>
+    <textarea class="question-input" rows="10" placeholder="Instrucción ROCI + resultado organizado (tablas de agrupación por tipo, turno y zona)..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ PARTE 2 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 2</span>
+    <span class="section-title">Interpretar los patrones</span>
+  </div>
+  <p class="section-desc">Con los datos ya organizados, pide a la IA que identifique los tres patrones más relevantes y que formule una hipótesis para cada uno. Recuerda indicarle que no afirme causalidad: debe señalar la concentración y sugerir una posible explicación que el equipo deberá valorar.</p>
+
+  <div class="question-card">
+    <span class="question-num">02</span>
+    <p class="question-text">Pega aquí la instrucción de interpretación y el resultado de la IA.</p>
+    <textarea class="question-input" rows="10" placeholder="Instrucción de interpretación + patrones y hipótesis identificados por la IA..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">03</span>
+    <p class="question-text">Contrasta las hipótesis de la IA con tu criterio profesional. ¿Coincide tu lectura de los datos con la de la herramienta? Señala al menos un punto en el que estés de acuerdo y uno en el que tu criterio aporte un matiz o una corrección.</p>
+    <textarea class="question-input" rows="5" placeholder="Tu valoración profesional de los patrones detectados..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ PARTE 3 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 3</span>
+    <span class="section-title">Proponer un plan de acción</span>
+  </div>
+  <p class="section-desc">Usa los hallazgos verificados de la Parte 2 para pedir a la IA un plan de acción con tres medidas concretas. La instrucción debe incluir los patrones confirmados y las restricciones razonables de un centro residencial de sesenta plazas. Cada medida debe indicar: qué se propone, a qué problema responde, quién sería responsable y en qué plazo.</p>
+
+  <div class="question-card">
+    <span class="question-num">04</span>
+    <p class="question-text">Pega aquí tu instrucción ROCI y el plan de acción generado.</p>
+    <textarea class="question-input" rows="10" placeholder="Instrucción ROCI + plan de acción con tres medidas concretas..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <span class="question-num">05</span>
+    <p class="question-text">¿Presentarías este plan tal cual en la reunión con dirección? Si no, ¿qué cambiarías, añadirías o eliminarías antes de llevarlo?</p>
+    <textarea class="question-input" rows="5" placeholder="Tu valoración del plan: qué mantendrías y qué ajustarías..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-label">Frase de cierre</div>
+    <div class="frase-stem">
+      <em>«Lo que más me ha aportado recorrer el ciclo completo —organizar, interpretar, proponer— ha sido...</em>
+    </div>
+    <textarea class="frase-input" rows="3" placeholder="...completa la frase con tu propia conclusión" oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <div class="nota-icon">📌</div>
+    <div class="nota-text">
+      <strong>¿Para qué sirve esto?</strong> Esta actividad reproduce un flujo de trabajo real: recibir datos acumulados, convertirlos en información útil y traducir esa información en acciones. La IA participa en las tres fases, pero en cada una el profesional tiene un papel distinto: verificar los datos organizados, contrastar las hipótesis con su conocimiento del centro y evaluar si las propuestas son viables. Lo que queda al final no es un documento generado por la IA, sino un plan de acción construido con la herramienta como asistente.
+    </div>
+  </div>
+
+  <!-- BOTÓN PDF -->
+  <div class="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div>
+
+<script>
+  // Datos en texto plano para copiar
+  var datosTexto = "Registros de incidencias — Marzo\nCentro residencial de personas mayores · 60 plazas · 25 incidencias registradas\n\nN.º | Fecha | Turno | Tipo | Zona | Descripción\n1 | 02/03 | Noche | Caída | Habitaciones ala A | P03 encontrada en el suelo junto a la cama. Sin lesiones aparentes. Refiere haber ido al baño.\n2 | 03/03 | Mañana | Agitación | Sala común | P11 episodio de agitación durante el desayuno. Se calmó tras acompañamiento de auxiliar.\n3 | 05/03 | Noche | Caída | Habitaciones ala B | P08 caída al levantarse. Hematoma en rodilla derecha. Avisado médico de guardia.\n4 | 06/03 | Tarde | Conflicto entre usuarios | Sala de actividades | P04 y P15 discusión durante taller. Se separaron sin incidente mayor.\n5 | 07/03 | Mañana | Error medicación | Enfermería | P12 recibió medicación de P13 por confusión de bandejas. Detectado antes de la toma. Sin consecuencias.\n6 | 08/03 | Noche | Caída | Habitaciones ala B | P08 segunda caída en la semana. Contusión leve en cadera. Médico recomienda valorar barandillas.\n7 | 09/03 | Tarde | Agitación | Sala común | P11 episodio de agitación a media tarde. Fin de semana. Sin actividad programada.\n8 | 10/03 | Mañana | Incidencia técnica | Comedor | Avería en sistema de llamada de la mesa 3. Reportado a mantenimiento.\n9 | 11/03 | Noche | Caída | Pasillo ala B | P19 caída en el pasillo camino al baño. Iluminación de emergencia insuficiente según auxiliar de turno.\n10 | 12/03 | Mañana | Agitación | Habitaciones ala A | P06 se niega a levantarse. Muestra ansiedad. Coincide con cambio de medicación hace tres días.\n11 | 13/03 | Tarde | Conflicto entre usuarios | Comedor | P04 y P15 nueva discusión, esta vez en el comedor. Auxiliar sugiere revisar distribución de mesas.\n12 | 14/03 | Noche | Caída | Habitaciones ala B | P22 caída leve al intentar alcanzar el timbre de llamada. Sin lesiones.\n13 | 15/03 | Mañana | Error medicación | Enfermería | Medicación de P09 preparada con dosis incorrecta. Detectado en el doble chequeo. Sin administración.\n14 | 16/03 | Tarde | Agitación | Sala común | P11 y P06 episodios simultáneos de inquietud. Sábado por la tarde. Sin actividad programada.\n15 | 16/03 | Noche | Caída | Habitaciones ala B | P08 tercera caída del mes. Médico indica valoración urgente de entorno y movilidad.\n16 | 18/03 | Mañana | Incidencia técnica | Habitaciones ala B | Luz del baño de habitación 14 fundida. Reportado. No reparado en tres días.\n17 | 19/03 | Tarde | Fuga/desorientación | Jardín | P17 encontrado en el jardín desorientado, había salido sin avisar. Puerta lateral no estaba asegurada.\n18 | 20/03 | Noche | Caída | Pasillo ala B | P19 segunda caída en el pasillo. Misma zona que el 11/03. Auxiliar reitera problema de iluminación.\n19 | 21/03 | Mañana | Agitación | Comedor | P11 rechaza el desayuno con agitación. Terapeuta sugiere revisar pauta de sueño.\n20 | 22/03 | Tarde | Conflicto entre usuarios | Sala de actividades | P04 y P15 tercer conflicto. Auxiliar propone no coincidir en la misma actividad.\n21 | 23/03 | Noche | Caída | Habitaciones ala A | P03 segunda caída del mes. Similar a la primera: camino al baño, sin lesiones.\n22 | 23/03 | Tarde | Agitación | Sala común | P06 episodio de ansiedad. Sábado. Sin actividad programada en esa franja.\n23 | 25/03 | Mañana | Error medicación | Enfermería | Falta de registro de administración de P20. Detectado en el cierre de turno.\n24 | 27/03 | Tarde | Incidencia técnica | Habitaciones ala B | Timbre de llamada de habitación 16 no funciona. Segundo aviso a mantenimiento.\n25 | 29/03 | Noche | Caída | Habitaciones ala B | P12 caída al bajar de la cama. Sin barandillas activadas. Auxiliar nocturno estaba atendiendo otra planta.";
+
+  function copyData() {
+    var btn = document.getElementById('copyBtn');
+    navigator.clipboard.writeText(datosTexto).then(function() {
+      btn.classList.add('copied');
+      btn.innerHTML = '<span class="copy-icon">✓</span> Datos copiados';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<span class="copy-icon">📋</span> Copiar datos para pegar en la IA';
+      }, 3000);
+    }).catch(function() {
+      // Fallback para navegadores que no soportan clipboard API
+      var ta = document.createElement('textarea');
+      ta.value = datosTexto;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        btn.classList.add('copied');
+        btn.innerHTML = '<span class="copy-icon">✓</span> Datos copiados';
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<span class="copy-icon">📋</span> Copiar datos para pegar en la IA';
+        }, 3000);
+      } catch(e) {
+        alert('No se ha podido copiar automáticamente. Selecciona los datos de la tabla manualmente.');
+      }
+      document.body.removeChild(ta);
+    });
+  }
+
+  function updateProgress() {
+    // Parte 1: instrucción ROCI + resultado organizado
+    var q1 = document.querySelectorAll('.question-input')[0];
+    var parte1 = q1 && q1.value.trim().length > 30;
+
+    // Parte 2: interpretación + contraste profesional
+    var q2 = document.querySelectorAll('.question-input')[1];
+    var q3 = document.querySelectorAll('.question-input')[2];
+    var parte2 = q2 && q2.value.trim().length > 20 && q3 && q3.value.trim().length > 10;
+
+    // Parte 3: plan de acción + valoración + frase de cierre
+    var q4 = document.querySelectorAll('.question-input')[3];
+    var q5 = document.querySelectorAll('.question-input')[4];
+    var frase = document.querySelector('.frase-input');
+    var parte3 = q4 && q4.value.trim().length > 20 && q5 && q5.value.trim().length > 10 && frase && frase.value.trim().length > 5;
+
+    var completed = [parte1, parte2, parte3].filter(Boolean).length;
+    var pct = (completed / 3) * 100;
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = completed + ' / 3 partes completadas';
+  }
+</script>
+
+</body>
+</html>
