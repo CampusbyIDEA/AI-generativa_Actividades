@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diseñar una ficha de acogida — Actividad 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  h1 em {
+    color: var(--yellow);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+    max-width: 620px;
+    margin-bottom: 22px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 12px;
+    color: var(--teal-light);
+    font-weight: 300;
+  }
+  .meta-item strong {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 3px;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 44px 40px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    border-left: 4px solid var(--teal);
+    background: var(--white);
+    padding: 22px 28px;
+    margin-bottom: 32px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+  }
+  .intro-block p { margin-bottom: 10px; }
+  .intro-block p:last-child { margin-bottom: 0; }
+
+  /* ── SITUACIÓN DE PARTIDA ── */
+  .situacion-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .situacion-header {
+    background: var(--navy);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .situacion-header-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+  }
+  .situacion-header-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+  }
+  .situacion-text {
+    padding: 24px 28px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+  .situacion-text p { margin-bottom: 10px; }
+  .situacion-text p:last-child { margin-bottom: 0; }
+  .situacion-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  .situacion-text ul li {
+    padding: 6px 0 6px 20px;
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.7;
+  }
+  .situacion-text ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  /* ── COPY BUTTON ── */
+  .copy-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 28px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s, transform 0.1s;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .copy-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .copy-btn:active { transform: translateY(0); }
+  .copy-btn.copied {
+    background: var(--teal);
+    color: var(--white);
+  }
+  .copy-icon {
+    font-size: 16px;
+    line-height: 1;
+  }
+  .copy-hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 32px;
+    padding-left: 4px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .progress-label-text {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--camel-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--teal);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTIONS ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+    margin-top: 8px;
+  }
+  .section-number {
+    font-family: 'Crimson Text', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  /* ── PERFIL SELECTOR ── */
+  .perfil-selector {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .perfil-option {
+    flex: 1;
+    min-width: 200px;
+    background: var(--white);
+    border: 2px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .perfil-option:hover {
+    border-color: var(--teal-light);
+  }
+  .perfil-option.selected {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 1px var(--teal);
+  }
+  .perfil-option-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .perfil-option-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── TABLE ROCI ── */
+  .table-wrapper {
+    margin-bottom: 24px;
+  }
+  .table-header-wide {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    background: var(--navy);
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+  }
+  .table-header-wide .th {
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .table-row-wide {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 1px solid var(--line);
+    background: var(--white);
+  }
+  .table-row-wide:last-child {
+    border-radius: 0 0 8px 8px;
+  }
+  .table-row-wide .td {
+    padding: 14px 16px;
+  }
+  .td-label {
+    font-size: 14px;
+    color: var(--navy);
+  }
+  .td-label strong {
+    display: block;
+    font-weight: 600;
+  }
+  .td-label span {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .td-edit {
+    min-height: 48px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13.5px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.65;
+    outline: none;
+    border-bottom: 1px dashed var(--camel-light);
+    padding-bottom: 4px;
+  }
+  .td-edit:empty::before {
+    content: attr(data-placeholder);
+    color: var(--camel-mid);
+    font-style: italic;
+  }
+
+  /* ── PROMPT EDITOR ── */
+  .prompt-editor {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .prompt-editor-label {
+    background: rgba(63,122,147,0.06);
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--teal-dark);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .badge-ok {
+    background: var(--teal);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .prompt-textarea {
+    width: 100%;
+    min-height: 140px;
+    border: none;
+    padding: 18px 20px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: transparent;
+    resize: vertical;
+    outline: none;
+  }
+  .prompt-textarea::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+  }
+
+  /* ── QUESTION CARDS ── */
+  .question-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+  .question-text {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-light);
+    margin-bottom: 14px;
+  }
+  .question-input {
+    width: 100%;
+    min-height: 80px;
+    border: none;
+    border-bottom: 1.5px solid var(--camel-light);
+    padding: 10px 0;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink);
+    background: transparent;
+    resize: vertical;
+    outline: none;
+  }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 36px 0;
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+  .frase-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 28px;
+    width: 40px; height: 3px;
+    background: var(--yellow);
+    border-radius: 2px;
+  }
+  .frase-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 12px;
+    margin-top: 8px;
+  }
+  .frase-input {
+    width: 100%;
+    min-height: 60px;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-family: 'Crimson Text', serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--white);
+    background: rgba(255,255,255,0.08);
+    resize: vertical;
+    outline: none;
+  }
+  .frase-input::placeholder {
+    color: rgba(255,255,255,0.3);
+    font-style: italic;
+  }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 22px 28px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-light);
+    margin-bottom: 28px;
+  }
+  .nota-final strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── PRINT BAR ── */
+  .print-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 16px 24px;
+  }
+  .print-bar-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+  }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .print-btn:hover { opacity: 0.88; }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .header { padding: 28px 0 20px; }
+    .header-stripe, .progress-wrap, .print-bar, .copy-btn, .copy-hint { display: none !important; }
+    .main { padding: 20px 0; }
+    .perfil-option { border: 1px solid #ccc; }
+    .perfil-option.selected { border: 2px solid var(--teal); }
+    .question-card, .intro-block, .nota-final, .situacion-block, .prompt-editor { break-inside: avoid; box-shadow: none; }
+    .header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .situacion-header { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .table-header-wide { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .frase-block { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    .frase-input { background: white !important; color: var(--navy) !important; border: 1px solid #ccc !important; }
+    textarea::placeholder { color: transparent !important; }
+    .question-input { border-bottom: 1px solid #ccc !important; min-height: 32px; }
+    textarea { border: none !important; background: transparent !important; resize: none; overflow: visible !important; height: auto !important; min-height: 0 !important; }
+    .divider { margin: 24px 0; }
+    @page { margin: 1.5cm; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner { padding: 0 24px; }
+    .main { padding: 36px 20px 60px; }
+    .frase-block { padding: 28px 22px; }
+    .header-meta { gap: 16px; }
+    .print-bar { flex-direction: column; align-items: flex-start; }
+    .situacion-header { flex-direction: column; align-items: stretch; gap: 12px; }
+    .copy-btn { justify-content: center; }
+    .situacion-block { padding: 0; }
+    h1 { font-size: 28px; }
+    .perfil-option { min-width: 100%; }
+    .table-header-wide { grid-template-columns: 140px 1fr; }
+    .table-row-wide { grid-template-columns: 140px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 9 · Actividad 1</div>
+    <h1>Diseñar una <em>ficha de acogida</em></h1>
+    <p class="header-sub">Crear un material de referencia para un nuevo profesional usando IA, aplicando el modelo ROCI y evaluando el resultado</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>15–20 min</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — ChatGPT, Copilot, Gemini, Claude u otra similar</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="intro-block">
+    <p>En la Lección 1 de esta sección se ha trabajado la idea de que muchos centros necesitan materiales formativos internos que nunca llegan a producirse. La ficha de acogida es uno de los casos más frecuentes: cuando se incorpora un profesional nuevo, la información que necesita para empezar a trabajar suele transmitirse de forma oral, sin un documento de referencia al que volver.</p>
+    <p>Esta actividad propone recorrer el proceso completo: decidir a quién va dirigida la ficha, construir una instrucción ROCI con la información del centro, generar la ficha con IA y evaluar si el resultado es realmente útil para su destinatario.</p>
+  </div>
+
+  <!-- SITUACIÓN DE PARTIDA -->
+  <div class="situacion-block">
+    <div class="situacion-header">
+      <div>
+        <div class="situacion-header-title">Situación de partida</div>
+        <div class="situacion-header-sub">Datos del centro simulado · Para copiar y pegar en la IA</div>
+      </div>
+      <button class="copy-btn" id="copyBtn" onclick="copyData()">
+        <span class="copy-icon">📋</span>
+        Copiar datos para pegar en la IA
+      </button>
+    </div>
+    <div class="situacion-text">
+      <p>Un centro residencial de personas mayores con sesenta plazas va a incorporar en las próximas semanas a tres profesionales: una auxiliar de atención directa para el turno de tarde, un fisioterapeuta a media jornada y una enfermera de refuerzo para fines de semana. La coordinadora quiere preparar fichas de acogida para que cada uno tenga un documento de referencia desde el primer día.</p>
+      <p><strong>El centro funciona así:</strong></p>
+      <ul>
+        <li>Tres turnos: mañana (de siete a quince), tarde (de quince a veintitrés) y noche (de veintitrés a siete).</li>
+        <li>Dos plantas residenciales. La planta baja aloja a personas con mayor nivel de dependencia. La primera planta, a personas con mayor autonomía.</li>
+        <li>Las rondas de supervisión se hacen cada tres horas en ambas plantas.</li>
+        <li>Los registros de incidencias se anotan en el cuaderno de turno y las más relevantes se trasladan al sistema informático antes del cambio de turno.</li>
+        <li>El protocolo de caídas establece: no mover a la persona, avisar al enfermero de guardia, registrar la incidencia con hora, lugar y circunstancias. Si hay sospecha de fractura, llamar al servicio médico de urgencias.</li>
+        <li>Hay seis personas usuarias con dieta de textura modificada (tres en planta baja, tres en primera). La lista actualizada está en el tablón de enfermería.</li>
+        <li>Los tratamientos farmacológicos se administran en tres pautas: ocho de la mañana, catorce horas y veintiuna horas. El carro de medicación se prepara en enfermería y la administración la supervisa el enfermero o enfermera de turno.</li>
+        <li>Los Planes de Atención Individualizados están en carpetas identificadas en el despacho de coordinación. Se revisan trimestralmente.</li>
+        <li>El fisioterapeuta trabaja en la sala de rehabilitación de planta baja. Las sesiones programadas están en el planning semanal colgado en la puerta de la sala.</li>
+        <li>Teléfonos de emergencia: recepción (extensión cien), enfermería (extensión doscientos uno), coordinación (extensión trescientos), urgencias externas (ciento doce).</li>
+      </ul>
+    </div>
+  </div>
+  <p class="copy-hint">Usa el botón «Copiar datos» para pegar la información del centro directamente en tu herramienta de IA junto con tu instrucción ROCI.</p>
+
+  <!-- PROGRESO -->
+  <div class="progress-wrap">
+    <span class="progress-label-text" id="progress-label">0 / 2 partes completadas</span>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ PARTE 1 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 1</span>
+    <span class="section-title">Elegir el perfil y construir la instrucción ROCI</span>
+  </div>
+  <p class="section-desc">De los tres profesionales que se van a incorporar, elige uno. La elección condiciona todo el ejercicio: cada perfil necesita información diferente. Después, construye la instrucción ROCI seleccionando de la situación de partida solo los datos relevantes para ese perfil.</p>
+
+  <div class="perfil-selector">
+    <div class="perfil-option" onclick="selectPerfil(this, 'auxiliar')">
+      <div class="perfil-option-title">Auxiliar de atención directa</div>
+      <div class="perfil-option-desc">Turno de tarde · Atención diaria a personas usuarias</div>
+    </div>
+    <div class="perfil-option" onclick="selectPerfil(this, 'fisio')">
+      <div class="perfil-option-title">Fisioterapeuta</div>
+      <div class="perfil-option-desc">Media jornada · Rehabilitación y movilización</div>
+    </div>
+    <div class="perfil-option" onclick="selectPerfil(this, 'enfermera')">
+      <div class="perfil-option-title">Enfermera de refuerzo</div>
+      <div class="perfil-option-desc">Fines de semana · Supervisión clínica y medicación</div>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <div class="table-header-wide">
+      <div class="th">Bloque ROCI</div>
+      <div class="th">Tu aportación</div>
+    </div>
+    <div class="table-row-wide">
+      <div class="td"><div class="td-label"><strong>R — Rol</strong><span>¿Desde qué perfil profesional debe escribir la IA?</span></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Ej: Actúa como la coordinadora de un centro residencial..." oninput="updateProgress()"></div></div>
+    </div>
+    <div class="table-row-wide">
+      <div class="td"><div class="td-label"><strong>O — Objetivo</strong><span>¿Para quién es la ficha y qué debe permitirle?</span></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Ej: Generar una ficha de acogida para que la nueva auxiliar de tarde..." oninput="updateProgress()"></div></div>
+    </div>
+    <div class="table-row-wide">
+      <div class="td"><div class="td-label"><strong>C — Contexto</strong><span>Información del centro relevante para este perfil</span></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Selecciona de la situación de partida solo los datos que este profesional necesita conocer..." oninput="updateProgress()"></div></div>
+    </div>
+    <div class="table-row-wide">
+      <div class="td"><div class="td-label"><strong>I — Instrucción</strong><span>¿Qué documento, en qué tono, con qué formato?</span></div></div>
+      <div class="td"><div class="td-edit" contenteditable="true" data-placeholder="Ej: Organiza la información en una ficha consultable, con secciones breves..." oninput="updateProgress()"></div></div>
+    </div>
+  </div>
+
+  <p class="section-desc">Integra los cuatro bloques en una instrucción completa y envíala a la herramienta de IA:</p>
+
+  <div class="prompt-editor">
+    <div class="prompt-editor-label">
+      <span class="badge-ok">Tu prompt</span>
+      Instrucción ROCI completa para la ficha de acogida
+    </div>
+    <textarea class="prompt-textarea" id="prompt-roci" placeholder="Escribe aquí tu instrucción ROCI completa, integrando los cuatro bloques. Después, cópiala y pégala en tu herramienta de IA para generar la ficha." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════ PARTE 2 ══════════════════ -->
+  <div class="section-header">
+    <span class="section-number">Parte 2</span>
+    <span class="section-title">Evaluar el resultado</span>
+  </div>
+  <p class="section-desc">Una vez obtenida la ficha generada por la IA, evalúa el resultado respondiendo a estas tres preguntas.</p>
+
+  <div class="question-card">
+    <div class="question-num">01</div>
+    <div class="question-text">Si el nuevo profesional recibiera esta ficha en su primer día, ¿sabría lo esencial para empezar a trabajar? ¿Qué le faltaría?</div>
+    <textarea class="question-input" placeholder="Valora si la ficha cubre lo imprescindible para el perfil que has elegido..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="question-num">02</div>
+    <div class="question-text">¿La IA ha añadido información que no estaba en tu instrucción? Si es así, ¿esa información es correcta y útil, o es genérica e inventada?</div>
+    <textarea class="question-input" placeholder="Revisa si el resultado contiene datos que tú no proporcionaste..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="question-card">
+    <div class="question-num">03</div>
+    <div class="question-text">Si tuvieras que adaptar esta misma ficha para otro de los tres perfiles, ¿qué cambiarías en la instrucción ROCI? Indica al menos dos cambios concretos en el Objetivo y en el Contexto.</div>
+    <textarea class="question-input" placeholder="Piensa en qué información añadirías, quitarías o reformularías para otro perfil profesional..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <hr class="divider">
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-block::before"></div>
+    <div class="frase-label">Frase de cierre</div>
+    <textarea class="frase-input" placeholder="Escribe una frase que resuma lo que has aprendido al hacer esta actividad..." oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <strong>📌 Nota</strong>
+    Esta actividad no se envía ni se corrige automáticamente. Su propósito es practicar el proceso completo de creación de materiales formativos con IA: seleccionar la información relevante, construir una instrucción ROCI adaptada al perfil y evaluar críticamente el resultado. Puedes descargar tu trabajo en PDF o compartir el resultado en el foro.
+  </div>
+
+  <!-- BARRA PDF -->
+  <div class="print-bar">
+    <span class="print-bar-text">Guarda tu trabajo antes de cerrar esta página</span>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div>
+
+<script>
+  // Datos en texto plano para copiar
+  var datosTexto = "Situación de partida — Ficha de acogida\n\nUn centro residencial de personas mayores con sesenta plazas va a incorporar a tres profesionales: una auxiliar de atención directa para el turno de tarde, un fisioterapeuta a media jornada y una enfermera de refuerzo para fines de semana.\n\nDatos del centro:\n\n- Tres turnos: mañana (de 7 a 15), tarde (de 15 a 23) y noche (de 23 a 7).\n- Dos plantas residenciales. Planta baja: personas con mayor nivel de dependencia. Primera planta: personas con mayor autonomía.\n- Rondas de supervisión cada tres horas en ambas plantas.\n- Los registros de incidencias se anotan en el cuaderno de turno y las más relevantes se trasladan al sistema informático antes del cambio de turno.\n- Protocolo de caídas: no mover a la persona, avisar al enfermero de guardia, registrar la incidencia con hora, lugar y circunstancias. Si hay sospecha de fractura, llamar al servicio médico de urgencias.\n- Seis personas usuarias con dieta de textura modificada (tres en planta baja, tres en primera). Lista actualizada en el tablón de enfermería.\n- Tratamientos farmacológicos en tres pautas: 8:00, 14:00 y 21:00. Carro de medicación preparado en enfermería. Administración supervisada por el enfermero/a de turno.\n- Planes de Atención Individualizados en carpetas identificadas en el despacho de coordinación. Revisión trimestral.\n- El fisioterapeuta trabaja en la sala de rehabilitación de planta baja. Planning semanal en la puerta de la sala.\n- Teléfonos de emergencia: recepción (ext. 100), enfermería (ext. 201), coordinación (ext. 300), urgencias externas (112).";
+
+  var selectedPerfil = null;
+
+  function selectPerfil(el, perfil) {
+    document.querySelectorAll('.perfil-option').forEach(function(opt) {
+      opt.classList.remove('selected');
+    });
+    el.classList.add('selected');
+    selectedPerfil = perfil;
+    updateProgress();
+  }
+
+  function copyData() {
+    var btn = document.getElementById('copyBtn');
+    navigator.clipboard.writeText(datosTexto).then(function() {
+      btn.classList.add('copied');
+      btn.innerHTML = '<span class="copy-icon">✓</span> Datos copiados';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<span class="copy-icon">📋</span> Copiar datos para pegar en la IA';
+      }, 3000);
+    }).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = datosTexto;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        btn.classList.add('copied');
+        btn.innerHTML = '<span class="copy-icon">✓</span> Datos copiados';
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<span class="copy-icon">📋</span> Copiar datos para pegar en la IA';
+        }, 3000);
+      } catch(e) {
+        alert('No se ha podido copiar automáticamente. Selecciona los datos manualmente.');
+      }
+      document.body.removeChild(ta);
+    });
+  }
+
+  function updateProgress() {
+    // Parte 1: perfil seleccionado + al menos 2 celdas ROCI con contenido + prompt
+    var celdas = document.querySelectorAll('.td-edit');
+    var celdasLlenas = 0;
+    celdas.forEach(function(c) {
+      if (c.textContent.trim().length > 10) celdasLlenas++;
+    });
+    var prompt = document.getElementById('prompt-roci');
+    var parte1 = selectedPerfil && celdasLlenas >= 2 && prompt && prompt.value.trim().length > 30;
+
+    // Parte 2: al menos 2 de las 3 preguntas respondidas + frase de cierre
+    var preguntas = document.querySelectorAll('.question-input');
+    var respondidas = 0;
+    preguntas.forEach(function(q) {
+      if (q.value.trim().length > 15) respondidas++;
+    });
+    var frase = document.querySelector('.frase-input');
+    var parte2 = respondidas >= 2 && frase && frase.value.trim().length > 5;
+
+    var completed = [parte1, parte2].filter(Boolean).length;
+    var pct = (completed / 2) * 100;
+
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = completed + ' / 2 partes completadas';
+  }
+</script>
+
+</body>
+</html>
