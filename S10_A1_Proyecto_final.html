@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu proyecto: tres usos reales de la IA en tu centro — Actividad 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:        #002F48;
+    --teal-dark:   #11516D;
+    --teal:        #3F7A93;
+    --teal-light:  #B6CED8;
+    --camel:       #A89B72;
+    --camel-mid:   #B7AB8A;
+    --camel-light: #CCC3AC;
+    --camel-pale:  #EAE4D6;
+    --yellow:      #FCDE06;
+    --white:       #FFFFFF;
+    --bg:          #F5F3EF;
+    --ink:         #1A2530;
+    --ink-light:   #3D5060;
+    --muted:       #7A8E99;
+    --line:        #D8D2C4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 52px 0 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(182,206,216,0.12);
+    pointer-events: none;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: 100px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(182,206,216,0.07);
+    pointer-events: none;
+  }
+  .header-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+  }
+  .header-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  h1 em {
+    color: var(--yellow);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+    max-width: 620px;
+    margin-bottom: 22px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-size: 12px;
+    color: var(--teal-light);
+    font-weight: 300;
+  }
+  .meta-item strong {
+    display: block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 3px;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 44px 40px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    border-left: 4px solid var(--teal);
+    background: var(--white);
+    padding: 22px 28px;
+    margin-bottom: 32px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+  }
+  .intro-block p { margin-bottom: 10px; }
+  .intro-block p:last-child { margin-bottom: 0; }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  #progress-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    background: var(--camel-light);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  #progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--teal);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+    margin-top: 8px;
+  }
+  .section-number {
+    font-family: 'Crimson Text', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .section-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  /* ── SECTION BLOCK ── */
+  .section-block {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .section-block-header {
+    background: var(--navy);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-block-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .section-block-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+  }
+  .section-block-body {
+    padding: 24px 28px 28px;
+  }
+  .section-block-intro {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+    border-left: 3px solid var(--teal-light);
+    padding-left: 14px;
+  }
+
+  /* ── QUESTION CARD ── */
+  .question-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 18px 20px 16px;
+    margin-bottom: 14px;
+  }
+  .question-num {
+    font-family: 'Crimson Text', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    display: block;
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+  .question-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .question-input {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--white);
+    resize: vertical;
+    line-height: 1.6;
+    transition: border-color 0.2s;
+  }
+  .question-input:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+  .question-input::placeholder {
+    color: var(--camel-mid);
+    font-style: italic;
+  }
+
+  /* ── ROCI TAG ── */
+  .roci-tag {
+    display: inline-block;
+    background: var(--teal-light);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  /* ── FRASE DE CIERRE ── */
+  .frase-block {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 28px 32px 24px;
+    margin-bottom: 10px;
+  }
+  .frase-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 10px;
+  }
+  .frase-stem {
+    font-family: 'Crimson Text', serif;
+    font-size: 17px;
+    font-style: italic;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .frase-input {
+    width: 100%;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: 'Crimson Text', serif;
+    font-size: 15px;
+    color: var(--white);
+    background: rgba(255,255,255,0.08);
+    resize: vertical;
+    line-height: 1.6;
+  }
+  .frase-input:focus {
+    outline: none;
+    border-color: var(--yellow);
+  }
+  .frase-input::placeholder {
+    color: rgba(255,255,255,0.3);
+    font-style: italic;
+  }
+
+  /* ── NOTA FINAL ── */
+  .nota-final {
+    background: var(--camel-pale);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 32px;
+  }
+  .nota-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .nota-text { font-size: 13px; line-height: 1.7; color: var(--ink-light); }
+  .nota-text strong { color: var(--navy); font-weight: 600; }
+
+  /* ── PRINT BAR ── */
+  .print-bar {
+    background: var(--navy);
+    border-radius: 10px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .print-bar-left { display: flex; align-items: center; gap: 14px; }
+  .print-icon { font-size: 22px; color: var(--teal-light); }
+  .print-title { font-size: 14px; font-weight: 500; color: var(--white); }
+  .print-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .print-btn {
+    background: var(--yellow);
+    color: var(--navy);
+    border: none;
+    border-radius: 6px;
+    padding: 12px 28px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+  .print-btn:hover { opacity: 0.88; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 32px 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .header-inner, .main { padding-left: 20px; padding-right: 20px; }
+    h1 { font-size: 28px; }
+    .section-block-body { padding: 18px 18px 20px; }
+    .frase-block { padding: 22px 20px 20px; }
+    .print-bar { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .print-bar, .progress-wrap { display: none; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .section-block-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .frase-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .nota-final { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .question-input, .frase-input { border: 1px solid #ccc; }
+    .section-block { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-stripe"></div>
+  <div class="header-inner">
+    <div class="header-label">Sección 10 — Proyecto final</div>
+    <h1>Tu <em>proyecto:</em> tres usos reales<br>de la IA en tu centro</h1>
+    <p class="header-sub">Actividad 1 — Demostración de competencia aplicada</p>
+    <div class="header-meta">
+      <div class="meta-item"><strong>Duración</strong>40–50 minutos</div>
+      <div class="meta-item"><strong>Modalidad</strong>Individual</div>
+      <div class="meta-item"><strong>Uso de IA</strong>Sí — ChatGPT, Copilot, Gemini, Claude u otra</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- INTRO -->
+  <div class="intro-block">
+    <p>Este es el último paso del curso. No es una evaluación: es una demostración de competencia.</p>
+    <p>A lo largo de las nueve secciones anteriores se han trabajado ámbitos distintos: documentación, comunicación con familias, análisis de incidencias, formación del equipo. Esta actividad pide aplicar esa lógica tres veces, en tres ámbitos diferentes del propio trabajo.</p>
+    <p>El resultado no es un documento perfecto. Es un registro de lo que ha ocurrido: qué se pidió, qué se obtuvo, qué se ajustó y qué ha puesto el profesional que la herramienta no podía poner.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <span id="progress-label">0 / 3 partes completadas</span>
+    <div class="progress-track"><div id="progress-bar"></div></div>
+  </div>
+
+  <!-- PARTE 1 -->
+  <div class="section-block">
+    <div class="section-block-header">
+      <span class="section-block-num">Parte 1</span>
+      <span class="section-block-title">Tarea de documentación</span>
+    </div>
+    <div class="section-block-body">
+      <p class="section-block-intro">Elige una tarea relacionada con la producción o mejora de documentos del centro: un registro, un informe de evolución, una nota de turno, una actualización de protocolo, un Plan de Atención Individual o cualquier otro documento habitual.</p>
+
+      <div class="question-card">
+        <span class="question-num">01</span>
+        <p class="question-text">¿Qué tarea has elegido? Descríbela brevemente e indica por qué la has seleccionado para esta actividad.</p>
+        <textarea class="question-input" rows="3" placeholder="Describe la tarea y el motivo de tu elección..." oninput="updateProgress()"></textarea>
+      </div>
+
+      <div class="question-card">
+        <span class="roci-tag">Instrucción ROCI</span>
+        <p class="question-text">02 — Escribe la instrucción ROCI que has utilizado. Si has iterado, incluye la repregunta más relevante.</p>
+        <textarea class="question-input" rows="6" placeholder="Rol: ...\nObjetivo: ...\nContexto: ...\nInstrucción: ..." oninput="updateProgress()"></textarea>
+      </div>
+
+      <div class="question-card">
+        <span class="question-num">03</span>
+        <p class="question-text">¿Qué has tenido que modificar o completar en el resultado generado? ¿Qué ha aportado tu conocimiento del caso o del centro que la IA no tenía?</p>
+        <textarea class="question-input" rows="4" placeholder="Qué has ajustado y qué criterio propio ha sido necesario..." oninput="updateProgress()"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTE 2 -->
+  <div class="section-block">
+    <div class="section-block-header">
+      <span class="section-block-num">Parte 2</span>
+      <span class="section-block-title">Tarea de comunicación</span>
+    </div>
+    <div class="section-block-body">
+      <p class="section-block-intro">Elige una tarea relacionada con la comunicación: un mensaje para una familia, una comunicación interna al equipo, un texto para un canal institucional, un recurso de lectura fácil o cualquier otra situación en la que la IA haya servido para adaptar, redactar o transformar un contenido.</p>
+
+      <div class="question-card">
+        <span class="question-num">04</span>
+        <p class="question-text">¿Qué tarea has elegido? Descríbela brevemente e indica a quién iba dirigida la comunicación.</p>
+        <textarea class="question-input" rows="3" placeholder="Describe la tarea y el destinatario..." oninput="updateProgress()"></textarea>
+      </div>
+
+      <div class="question-card">
+        <span class="roci-tag">Instrucción ROCI</span>
+        <p class="question-text">05 — Escribe la instrucción ROCI que has utilizado. Si has iterado, incluye la repregunta más relevante.</p>
+        <textarea class="question-input" rows="6" placeholder="Rol: ...\nObjetivo: ...\nContexto: ...\nInstrucción: ..." oninput="updateProgress()"></textarea>
+      </div>
+
+      <div class="question-card">
+        <span class="question-num">06</span>
+        <p class="question-text">¿Qué ha cambiado entre el primer resultado y el que finalmente has considerado válido? ¿Qué criterio propio has aplicado en ese ajuste?</p>
+        <textarea class="question-input" rows="4" placeholder="Diferencias entre el primer resultado y el final, y por qué..." oninput="updateProgress()"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTE 3 -->
+  <div class="section-block">
+    <div class="section-block-header">
+      <span class="section-block-num">Parte 3</span>
+      <span class="section-block-title">Tarea de planificación o formación</span>
+    </div>
+    <div class="section-block-body">
+      <p class="section-block-intro">Elige una tarea relacionada con la organización del trabajo, la toma de decisiones o la formación del equipo: preparar una reunión, analizar datos para proponer mejoras, elaborar un recurso formativo, diseñar una ficha de acogida o cualquier otra tarea de ese ámbito.</p>
+
+      <div class="question-card">
+        <span class="question-num">07</span>
+        <p class="question-text">¿Qué tarea has elegido? Descríbela brevemente.</p>
+        <textarea class="question-input" rows="3" placeholder="Describe la tarea..." oninput="updateProgress()"></textarea>
+      </div>
+
+      <div class="question-card">
+        <span class="roci-tag">Instrucción ROCI</span>
+        <p class="question-text">08 — Escribe la instrucción ROCI que has utilizado. Si has iterado, incluye la repregunta más relevante.</p>
+        <textarea class="question-input" rows="6" placeholder="Rol: ...\nObjetivo: ...\nContexto: ...\nInstrucción: ..." oninput="updateProgress()"></textarea>
+      </div>
+
+      <div class="question-card">
+        <span class="question-num">09</span>
+        <p class="question-text">¿Presentarías el resultado directamente en tu centro, o necesitaría ajustes antes? ¿Cuáles y por qué?</p>
+        <textarea class="question-input" rows="4" placeholder="Tu valoración del resultado y los ajustes que harías..." oninput="updateProgress()"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRASE DE CIERRE -->
+  <div class="frase-block">
+    <div class="frase-label">Frase de cierre</div>
+    <div class="frase-stem"><em>«Después de aplicar la IA a estas tres tareas, lo que más claramente veo sobre cómo quiero integrarla en mi trabajo es...</em></div>
+    <textarea class="frase-input" rows="3" placeholder="...completa la frase con tu propia conclusión" oninput="updateProgress()"></textarea>
+  </div>
+
+  <!-- NOTA FINAL -->
+  <div class="nota-final">
+    <div class="nota-icon">📌</div>
+    <div class="nota-text">
+      <strong>¿Para qué sirve esto?</strong> Este proyecto reproduce el recorrido completo del curso en tres contextos distintos. El valor no está solo en el resultado de cada tarea: está en reconocer qué ha aportado la IA en cada caso y qué has tenido que poner tú. Esa distinción, que al principio del curso no era evidente, es ahora la base de un uso profesional y autónomo de la herramienta.
+    </div>
+  </div>
+
+  <!-- PRINT BAR -->
+  <div class="print-bar">
+    <div class="print-bar-left">
+      <span class="print-icon">⬇</span>
+      <div>
+        <div class="print-title">Guarda tus respuestas</div>
+        <div class="print-sub">Se borrarán al cerrar la página. Descárgalas ahora como PDF.</div>
+      </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Descargar PDF</button>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  function updateProgress() {
+    // Parte 1: preguntas 01, 02, 03
+    var inputs = document.querySelectorAll('.question-input');
+    var p1 = inputs[0] && inputs[0].value.trim().length > 20
+          && inputs[1] && inputs[1].value.trim().length > 30
+          && inputs[2] && inputs[2].value.trim().length > 20;
+
+    // Parte 2: preguntas 04, 05, 06
+    var p2 = inputs[3] && inputs[3].value.trim().length > 20
+          && inputs[4] && inputs[4].value.trim().length > 30
+          && inputs[5] && inputs[5].value.trim().length > 20;
+
+    // Parte 3: preguntas 07, 08, 09
+    var p3 = inputs[6] && inputs[6].value.trim().length > 20
+          && inputs[7] && inputs[7].value.trim().length > 30
+          && inputs[8] && inputs[8].value.trim().length > 20;
+
+    var completed = [p1, p2, p3].filter(Boolean).length;
+    document.getElementById('progress-bar').style.width = (completed / 3 * 100) + '%';
+    document.getElementById('progress-label').textContent = completed + ' / 3 partes completadas';
+  }
+</script>
+
+</body>
+</html>
